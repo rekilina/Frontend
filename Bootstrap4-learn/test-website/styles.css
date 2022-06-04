@@ -14,21 +14,24 @@ body {
 
 .img-h4 {
 	height: 20vh;
-	width: 25vw;
+	/*width: 25vw;*/
 	object-fit: cover;
 }
-
+/*
 .hl-p {
 	text-align: justify;
 	width: 25vw;
 	margin: 0 auto;
 }
-
-h4.hl-p {
+*/
+.hl-p {
 	margin: 0.7em auto;
+	text-align: justify;
 }
 
-a > h4 {
+.h4-p {
 	color: black;
+	margin: 0.7em auto;
+	text-align: left;
 	/* text-decoration: underline; */
 }
