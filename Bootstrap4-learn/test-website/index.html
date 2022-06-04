@@ -33,6 +33,9 @@
 				<li class="nav-item"> <!-- Modal window button -->
 					<a href="#" class="nav-link" data-toggle="modal" data-target="#ExampleModal">About us</a>
 				</li>
+				<li class="nav-item"> <!-- Modal window button -->
+					<a href="#" class="nav-link" data-toggle="modal" data-target="#ModalSubscribe">Suscribe</a>
+				</li>
 			</ul>
 
 			<!-- form -->
@@ -124,7 +127,7 @@
 			<div class="modal-dialog modal-md" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="ExampleModalLabel">Modal</h5>
+						<h5 class="modal-title" id="ExampleModalLabel">About Ufology</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -146,16 +149,43 @@
 						including the United Kingdom, Canada, Denmark, Italy, and Sweden also ended.
 						An exception to this trend is France, which maintains the GEIPAN program,
 						formerly known as GEPAN (1977–1988) and SEPRA (1988–2004), operated by the French Space Agency CNES. </p>
-						<div class="container-fluid"></div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" data-dismiss="modal">Read more</button>
+						<a href="https://en.wikipedia.org/wiki/Ufology" class="btn btn-info btn-secondary"
+						role="button">Read more</a>
 						<button class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<div id="ModalSubscribe" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalSubscribe" aria-hidden="true">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="ModalSubscribeLabel">Subscribe</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<form>
+								<div class="form-group">
+									<label for="InputEmailForm">Email address</label>
+									<input type="email" class="form-control" id="InputEmailForm"
+									aria-describedby="emailHelp" placeholder="Email" required>
+									<small id="emailHelp" class="form-text text-muted">Enter your email to receive newsletters</small>
+								</div>
+								<div class="d-flex justify-content-end">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
