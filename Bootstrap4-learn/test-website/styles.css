@@ -4,9 +4,31 @@ body {
 
 .p-0 {
 	padding: 0;
+	margin-bottom: 5vh;
 }
 
 .h-img {
 	height: 40vh;
 	object-fit: cover;
+}
+
+.img-h4 {
+	height: 20vh;
+	width: 25vw;
+	object-fit: cover;
+}
+
+.hl-p {
+	text-align: justify;
+	width: 25vw;
+	margin: 0 auto;
+}
+
+h4.hl-p {
+	margin: 0.7em auto;
+}
+
+a > h4 {
+	color: black;
+	/* text-decoration: underline; */
 }
