@@ -1,0 +1,66 @@
+/* variables */
+$top-color: #d5afc1;
+$top-font: 'lato', sans-serif;
+
+.test {
+    text-align: center;
+}
+
+/* Вложенность */
+.menu {
+    float: right;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    li {
+        display: inline-block;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+/* & = this, self */
+.description {
+    color: #fff;
+    &:hover {
+        color: $top-color;
+    }
+}
+
+/* use & in class names
+or combine classes */
+.tools {
+    &-description {
+        text-align: left;
+    }
+    .item {
+        float:left;
+    }
+}
+
+/* set of properties */
+%name-item {
+    font-size: 22px;
+    background: $top-color;
+    padding: 10px;
+}
+
+.item-1 {
+    color: #ccc;
+    background-color: rgba($top-color, .9);
+    @extend %name-item;
+}
+
+.item-2 {
+    color: #fff;
+    @extend %name-item;
+}
+
+.item-3 {
+    color: #000;
+    @extend %name-item;
+}
+

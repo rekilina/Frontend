@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/* variables */
+.test {
+  text-align: center;
+}
+
+/* Вложенность */
+.menu {
+  float: right;
+}
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu li {
+  display: inline-block;
+}
+.menu li a {
+  text-decoration: none;
+}
+
+/* & = this, self */
+.description {
+  color: #fff;
+}
+.description:hover {
+  color: #d5afc1;
+}
+
+/* use & in class names
+or combine classes */
+.tools-description {
+  text-align: left;
+}
+.tools .item {
+  float: left;
+}
+
+/* set of properties */
+.item-1, .item-2, .item-3 {
+  font-size: 22px;
+  background: #d5afc1;
+  padding: 10px;
+}
+
+.item-1 {
+  color: #ccc;
+  background-color: rgba(213, 175, 193, 0.9);
+}
+
+.item-2 {
+  color: #fff;
+}
+
+.item-3 {
+  color: #000;
+}
