@@ -1,0 +1,12 @@
+body {
+    margin: 1em;
+    font-size: 24px;
+    background-color: green;
+}
+
+.menu {
+    padding: 0;
+    &__list {
+        margin: 10px;
+    }
+}
