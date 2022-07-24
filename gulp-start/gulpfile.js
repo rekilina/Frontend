@@ -110,4 +110,6 @@ exports.default = parallel(styles, scripts, browsersync, watching);
 npm i gulp-imagemin@7.1.0 --save-dev
  gulp - start watching
  gulp build - собрать проект
+ gulp build делается в конце проекта, когда нужно собрать папку dist,
+ до этого работаем в app
 */
