@@ -13,17 +13,17 @@ function getDate(date) {
     return day-1;
 }
 
-function creteCalendar (elem, year, month) {
+let month_number = Array.from(Array(12).keys());
+let month_names = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"];
+let months = {};
+month_number.forEach((key, i) => months[key] = month_names[i]);
+
+function creteMonthCalendar (elem, year, month) {
     elem = document.querySelector(elem);
     let mon = month - 1; // in JS from 0, we enter 5 = May
-    let month_number = Array.from(Array(10).keys());
-    let month_names = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
-    let months = {};
-    month_number.forEach((key, i) => months[key] = month_names[i]);
-
-        let table = `
-    <caption>${months[mon]} ${year}</caption>
+    let table = `
+    <div class="month">${months[mon]} ${year}</div>
     <table>
         <tr>
             <th>Mon</th>
@@ -55,6 +55,16 @@ function creteCalendar (elem, year, month) {
 
     table += `</tr></table>`;
     elem.innerHTML = table;
+    return table;
 }
 
-creteCalendar('.calendar', 2021, 10);
+// creteMonthCalendar('.calendar', 2021, 12);
+
+function createYearCalendar (selector, year) {
+    let elem = document.querySelector(selector);
+    for (let i=1; i<13; i++) {
+        elem.innerHTML += `<div class="calendar">${creteMonthCalendar(selector, year, i)}</div>`;
+    }
+}
+
+createYearCalendar('.year-calendar', 2021);
