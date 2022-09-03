@@ -1,9 +1,6 @@
 * {
     box-sizing: border-box;
 }
-body {
-    overflow-y: scroll;
-}
 .year-calendar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -47,14 +44,10 @@ th {
 }
 tr {
     display: flex;
-
 }
 .light {
     color: grey;
 }
-body {
-    overflow: hidden;
-  }
   
 .cursor-glow {
     height: 30px;
@@ -68,4 +61,5 @@ body {
     background-position: center;
     position: absolute;
     opacity: 0;
+    z-index: 1000;
 }
