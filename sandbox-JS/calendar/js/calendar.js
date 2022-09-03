@@ -58,13 +58,18 @@ function creteMonthCalendar (elem, year, month) {
     return table;
 }
 
-// creteMonthCalendar('.calendar', 2021, 12);
-
-function createYearCalendar (selector, year) {
+function createYearCalendar (selector, year=2021) {
+    try {
+        let input_year = document.querySelector(".input__year").value;
+        if (!isNaN(input_year)) {
+            year = input_year;
+        }
+    } catch (e) {    }    
     let elem = document.querySelector(selector);
+    elem.innerHTML = '';
     for (let i=1; i<13; i++) {
         elem.innerHTML += `<div class="calendar">${creteMonthCalendar(selector, year, i)}</div>`;
     }
 }
 
-createYearCalendar('.year-calendar', 2021);
+createYearCalendar('.year-calendar');
