@@ -4,9 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мини курс по JavaScript</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="alert">
+    <p>Message</p>
+  </div>
   
-  <script src="js/main.js"></script>
+  <script src="js/const.js"></script>
+  <script>
+    // create div
+    let div = document.querySelector('div.alert');
+    // --------------- delete after 2 s -----------------
+    //setTimeout(() => div.remove(), 2000);
+    // copy div
+    let div2 = div.cloneNode(true);
+    div2.querySelector('p').textContent = "Another message";
+    div.after(div2);
+    // ------------------create list---------------------
+    let ul = document.createElement('ul');
+    document.body.append(ul);
+    let str = '';
+    for (let i=0; i < 10; i++) {
+      // если объявить до цикла, то будем вставлять один и тот же объект
+      // и в итоге увидим в ul только один li
+      // а вот с примитивами (str) так делать можно
+      let li = document.createElement('li');
+      str = ''+i;
+      li.textContent = "li No = " + str;
+      ul.append(li);
+    }
+
+    //--------------- create complicated ul --------------
+    let ul_data = {
+      "Vegetables": {
+        "cucumbers": 5,
+        "tomatoes": 3
+      },
+      "Fruits": {
+        "red": {
+          "strawberry": 2,
+          "raspberry": 4
+        },
+        "green": {
+          "apple": 6,
+          "lime": 1
+        }
+      }
+    };
+    // create ul nested structure
+    function createNestedUl(obj) {
+      // if obj is empty - quit
+      // if argument is not an Object - quit
+      if(!Object.keys(obj).length) {
+        return 
+      }
+      // if there are some keys, crete ul
+      let ul = document.createElement('ul');
+      // loop over keys in obj
+      for (let key in obj) {
+        // if there are keys, than there are values
+        let li = document.createElement('li');
+        // is value (obj[key]) - a number?
+        if(!isNaN(obj[key])) { 
+          // if number, compose the string
+          li.textContent = key + obj[key];
+        } else {
+          // if not a number, than it is an object
+          li.textContent = key;
+        }
+        // remember, that if argument is not an Object - quit
+        let childrenUl = createNestedUl(obj[key]);
+        // if there are nested structures
+        if(childrenUl) {
+          li.append(childrenUl);
+        }
+        ul.append(li);
+      }
+      return ul;
+    }
+    // add structure to the document
+    function createTree(container, obj) {
+      document.querySelector(container).append(createNestedUl(obj));
+    }
+    createTree('.alert+.alert', ul_data);
+  </script>
 </body>
 </html>
