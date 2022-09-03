@@ -1,0 +1,36 @@
+th, td {
+    border: 1px solid black;
+    height: 30px;
+    width: 40px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+th {
+    background-color:rgb(184, 224, 226)
+}
+tr {
+    display: flex;
+
+}
+.light {
+    color: grey;
+}
+body {
+    overflow: hidden;
+  }
+  
+.cursor-glow {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: rgb(238,174,202);
+    background: -moz-radial-gradient(circle, rgba(238,174,202,0.8) 0%, rgba(238,174,202,0.2) 100%);
+    box-shadow: 0px 0px 20px rgba(238,174,202,1);
+    background: radial-gradient(circle, rgba(238,174,202,0.8) 0%, rgba(238,174,202,0.2) 100%);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    opacity: 0;
+}
