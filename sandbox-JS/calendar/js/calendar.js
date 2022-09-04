@@ -59,27 +59,28 @@ function creteMonthCalendar (elem, year, month) {
 }
 
 function createYearCalendar (selector, year=2021) {
-    year=2021;
+    // year=2021;
+    let err__holder = document.querySelector(".err__holder");
     try {
         let input_year = document.querySelector(".input__year").value;
         if (!Number.isNaN(input_year) && !isNaN(input_year) && Number.isInteger(Number(input_year)) && (input_year > 0)) {
             year = input_year;
-            document.querySelector(".err__holder").style.visibility = "hidden";
+            err__holder.style.visibility = "hidden";
         } else {
             year=2021;
             if (!Number.isInteger(Number(input_year)) || (input_year < 1)) {
-                document.querySelector(".err__holder").style.visibility = "visible";
-                document.querySelector(".err__holder").innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Incorrect input. The year set to 2021`
+                err__holder.style.visibility = "visible";
+                err__holder.innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Incorrect input. The year set to 2021`
             } 
             if (input_year == "") {
-                document.querySelector(".err__holder").style.visibility = "visible";
-                document.querySelector(".err__holder").innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Empty input. The year set to 2021`;
+                err__holder.style.visibility = "visible";
+                err__holder.innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Empty input. The year set to 2021`;
             }
-            //document.querySelector(".err__holder").style.visibility = "visible";
         }
     } catch (e) {
         year=2021;
-        //document.querySelector(".err__holder").style.visibility = "visible";
+        err__holder.style.visibility = "visible";
+        err__holder.innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Unknown error. The year set to 2021`;
     }    
     let elem = document.querySelector(selector);
     elem.innerHTML = '';
@@ -89,3 +90,12 @@ function createYearCalendar (selector, year=2021) {
 }
 
 createYearCalendar('.year-calendar');
+
+var input = document.querySelector(".input__year");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    // For now I don't understant, why it doesn't work without this line
+    event.preventDefault(); 
+    document.querySelector(".btn__year").click();
+  }
+});
