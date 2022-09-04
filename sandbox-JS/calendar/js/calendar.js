@@ -62,13 +62,24 @@ function createYearCalendar (selector, year=2021) {
     year=2021;
     try {
         let input_year = document.querySelector(".input__year").value;
-        if (!Number.isNaN(input_year) && Number.isInteger(input_year) && (input_year > 0)) {
+        if (!Number.isNaN(input_year) && !isNaN(input_year) && Number.isInteger(Number(input_year)) && (input_year > 0)) {
             year = input_year;
+            document.querySelector(".err__holder").style.visibility = "hidden";
         } else {
             year=2021;
+            if (!Number.isInteger(Number(input_year)) || (input_year < 1)) {
+                document.querySelector(".err__holder").style.visibility = "visible";
+                document.querySelector(".err__holder").innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Incorrect input. The year set to 2021`
+            } 
+            if (input_year == "") {
+                document.querySelector(".err__holder").style.visibility = "visible";
+                document.querySelector(".err__holder").innerHTML = `<span style="font-weight: 600; color: red;">Error:</span> Empty input. The year set to 2021`;
+            }
+            //document.querySelector(".err__holder").style.visibility = "visible";
         }
     } catch (e) {
         year=2021;
+        //document.querySelector(".err__holder").style.visibility = "visible";
     }    
     let elem = document.querySelector(selector);
     elem.innerHTML = '';

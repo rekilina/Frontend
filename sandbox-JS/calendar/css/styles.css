@@ -11,14 +11,24 @@
 }
 form {
     margin: 30px auto;
-    max-width: calc(42px * 7 * 3 + 30px * 2);
-    height: 30px;
     display: flex;
     justify-content: center;
     gap: 10px;
     align-items: center;
     position: relative;
     z-index: 11;
+    flex-direction: column;
+}
+.form__holder {
+    max-width: calc(42px * 7 * 3 + 30px * 2);
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.err__holder {
+    visibility: hidden;
 }
 .input__year {
     height: 100%;

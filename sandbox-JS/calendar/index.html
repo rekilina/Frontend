@@ -10,8 +10,11 @@
 <body>
     <div class="cursor-glow"></div>
     <form action="">
-        <input type="text" placeholder="year" class="input__year">
-        <input type="button" value="Submit" class="btn__year" onclick="createYearCalendar('.year-calendar')">
+        <div class="form__holder">
+            <input type="text" placeholder="year" class="input__year" value="2021">
+            <input type="button" value="Submit" class="btn__year" onclick="createYearCalendar('.year-calendar')">
+        </div>
+        <div class="err__holder"><span style="font-weight: 600; color: red;">Error:</span> Incorrect input. The year set to 2021.</div>
     </form>
     <div class="year-calendar"></div>
     
