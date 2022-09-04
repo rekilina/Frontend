@@ -59,12 +59,17 @@ function creteMonthCalendar (elem, year, month) {
 }
 
 function createYearCalendar (selector, year=2021) {
+    year=2021;
     try {
         let input_year = document.querySelector(".input__year").value;
-        if (!isNaN(input_year)) {
+        if (!Number.isNaN(input_year) && Number.isInteger(input_year) && (input_year > 0)) {
             year = input_year;
+        } else {
+            year=2021;
         }
-    } catch (e) {    }    
+    } catch (e) {
+        year=2021;
+    }    
     let elem = document.querySelector(selector);
     elem.innerHTML = '';
     for (let i=1; i<13; i++) {
