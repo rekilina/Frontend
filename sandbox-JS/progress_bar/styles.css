@@ -1,0 +1,16 @@
+.timer-progressbar {
+    display: flex;
+    width: 200px;
+}
+.timer-progressbar > div {
+    padding: 5px;
+}
+.timer-progressbar__fill {
+    background-color: #4db5e6;
+    width: 0%;
+}
+
+.timer-progressbar__empty {
+    background-color: #e6504d;
+    width: 100%;
+}
