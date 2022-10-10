@@ -1,0 +1,14 @@
+tr, td, th {
+    border: 1px solid black;
+    text-align: center;
+}
+table {
+    margin: 20px;
+}
+.item {
+    background-color: #c8c8c8;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+}
