@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- it's important to set id=theme -->
+    <link rel="stylesheet" href="style_light.css" id="theme">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h4>
+            Switch dark / light theme
+        </h4>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis earum amet sequi nihil in delectus eius. Eius excepturi reiciendis iusto assumenda nostrum nesciunt saepe quis similique, minima quod blanditiis repellat.
+        </p>
+        <label for="">
+            Включить темную тему?
+            <input type="checkbox" class="switch__input" id="switch" />
+            <label class="switch__label" for="switch">Toggle</label>
+        </label>
+    </div>
+    <script>
+        let switcher = document.querySelector('.switch__input');
+        let theme = document.getElementById('theme');
+
+        if(localStorage.getItem('theme') == "true") {
+            theme.setAttribute('href', 'style_dark.css');
+            switcher.checked = true;
+        }
+
+        switcher.onchange = function() {
+            if (this.checked) {
+                localStorage.setItem('theme', true)
+                theme.setAttribute('href', 'style_dark.css')
+            } else {
+                localStorage.setItem('theme', false)
+                theme.setAttribute('href', 'style_light.css')
+            }
+        }
+    </script>
+</body>
+</html>
