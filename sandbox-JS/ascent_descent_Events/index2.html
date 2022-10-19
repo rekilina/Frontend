@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bgc {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+    </table>
+
+    <script>
+        let table = document.querySelector('table');
+        let currentTd;
+        table.onclick = function (e) {
+            let td = e.target.closest('td'); //parent elem
+            if(!td) {return;}
+            if(!table.contains(td)) {return;}
+            hover(td);
+        }
+        function hover(td) {
+            if(currentTd) {
+                currentTd.classList.remove('bgc');
+            }
+            currentTd = td;
+            currentTd.classList.add('bgc');
+        }
+    </script>
+
+</body>
+</html>

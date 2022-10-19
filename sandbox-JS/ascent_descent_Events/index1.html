@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .alert {
+            background-color: rgba(154, 233, 154, 0.4);
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .block{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="alert" onclick="alert('Click!')">
+        <p>Lorem ipsum <span style="background-color:green;color: black; padding: 3px">dolor sit</span> amet.</p>
+    </div>
+
+    <div onclick="alert('DIV1')" style="border: 2px solid tomato; padding: 10px;" class="block test">
+        DIV1
+        <div onclick="alert('DIV2')" style="border: 2px solid tomato; padding: 10px;" class="test">
+            DIV2
+            <div onclick="alert('DIV3')" style="border: 2px solid tomato; padding: 10px;" class="test">
+                DIV3
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ascend (3ed stage) works
+        document.querySelector('.block').addEventListener('click', function(e){
+            console.log(this);
+            console.log(e.target);
+        });
+        // add TRUE to work with descent (1st stage)
+        for (let elem of document.querySelectorAll('*')) {
+            elem.addEventListener('click', function(e) {
+                console.log(elem.tagName + " - Phase " + e.eventPase)
+            }, true)
+        }
+    </script>
+
+</body>
+</html>
