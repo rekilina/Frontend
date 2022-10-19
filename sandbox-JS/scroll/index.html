@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div1" style="height: 780px; background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);">div1
+    <button>scroll</button></div>
+    <div class="div2" style="height: 780px; background-color: green;">div2</div>
+
+    <script>
+        let btn = document.querySelector('button');
+        // btn.addEventListener('click', function(e) {
+        //     window.scroll({
+        //         top: document.querySelector('.div2').offsetTop,
+        //         left: 0,
+        //         behavior: 'auto'
+        //     });
+        // })
+        function scrollSteps(from, target, duration) {
+            if(duration <= 0) return;
+            let startY = from.offsetTop;
+            console.log('startY = ' + startY);
+            let diffY = target.offsetTop - startY;
+            console.log('diffY = ' + diffY);
+            let N = 1000;
+            let pxStep = diffY / N;
+            console.log('pxStep = ' + pxStep);
+            let timeStep = duration / N;
+            console.log('timeStep = ' + timeStep);
+            for (let i = 1; i <= N; i++) {
+                let dest = startY + i * pxStep;
+                let time_delay = i * timeStep
+                window.setTimeout(function(){
+                    console.log('startY + i * pxStep = ' + dest);window.scroll({
+                    top: dest,
+                    left: 0,
+                    behavior: 'smooth'
+                })}, time_delay);
+            }
+            return;
+        }
+        let div2 = document.querySelector('.div2');
+        btn.addEventListener('click', function(e) {
+            let target_btn = e.target;
+            scrollSteps(target_btn, div2, 3000)
+        });
+    </script>
+</body>
+</html>
