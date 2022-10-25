@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ohtKeys(func, ...codes) {
+            let pressed = new Set();
+            document.addEventListener('keydown', function(e) {
+                pressed.add(e.code);
+                // Нажаты ли все кнопки одновременно
+                for(let code of codes) {
+                    if(!pressed.has(code)) {
+                        return;
+                    }
+                }
+                pressed.clear();
+                func();
+            })
+            document.addEventListener('keyup', function(e) {
+                pressed.delete(e.code);
+            })
+        }
+
+        hotKeys(function() {
+            console.log("You pressed F+G")
+        }, "keyF", "keyG")
+    </script>
+</body>
+</html>
