@@ -1,0 +1,20 @@
+.slider {
+    width: 300px;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+.slider__btn {
+    cursor: pointer;
+    background-color: dodgerblue;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    left: 0;
+    top: -5px;
+}
+body {
+    background-color: #333;
+    margin: 25px;
+}

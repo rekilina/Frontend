@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slider" id="slider">
+        <div class="slider__btn"></div>
+    </div>
+
+    <script>
+        let btn = slider.querySelector('.slider__btn');
+        btn.onmousedown = function(e) {
+            e.preventDefault();
+            let shiftX = e.clientX - btn.getBoundingClientRect().left;
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+
+            function onMouseMove(e) {
+                let newLeft = e.clientX - shiftX - slider.getBoundingClientRect().left;
+                if(newLeft < 0) {
+                    newLeft = 0;
+                }
+                let rightEdge = slider.offsetWidth - btn.offsetWidth;
+                if(newLeft > rightEdge) {
+                    newLeft = rightEdge;
+                }
+                btn.style.left = newLeft + 'px';
+            }
+            function onMouseUp() {
+                document.removeEventListener('mouseup', onMouseUp);
+                document.removeEventListener('mousemove', onMouseMove);
+            
+            }
+        }
+
+        btn.ondragstart = function() {
+            return false;
+        }
+    </script>
+</body>
+</html>
