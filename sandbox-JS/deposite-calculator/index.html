@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body id="dark">
+        <h1>Депозитный калькулятор</h1>
+        <div class="d-flex">
+            <form action="" name="calculator">
+                <table>
+                    <tr>
+                        <td>Первоначальный депозит</td>
+                        <td>
+                            <input type="number" name="money" value="10000" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Срок вклада?</td>
+                        <td>
+                            <select name="month" id="">
+                                <option value="3">3 (минимум)</option>
+                                <option value="6">6 (полгода)</option>
+                                <option value="12">12 (год)</option>
+                                <option value="18">18 (1.5 года)</option>
+                                <option value="24">24 (2 года)</option>
+                                <option value="30">30 (2.5 года)</option>
+                                <option value="36">36 (3года)</option>
+                                <option value="60">60 (5 лет)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Годовая процентная ставка</td>
+                        <td>
+                            <input type="number" name="interest" value="5" required>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <table id="diagram">
+                <tr>
+                    <th>Было</th>
+                    <th>Станет</th>
+                </tr>
+                <tr>
+                    <th id="money-before"></th>
+                    <th id="money-after"></th>
+                </tr>
+                <td>
+                    <div style="background-color: tomato;width:40px;height:100px;"></div>
+                </td>
+                <td>
+                    <div style="background-color: springgreen;width:40px;height:0;" id="height-after"></div>
+                </td>
+            </table>
+        </div>
+    </body>
+    <script src="index.js"></script>
+</body>
+</html>
