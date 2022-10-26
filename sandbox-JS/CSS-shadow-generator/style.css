@@ -1,0 +1,49 @@
+body {
+    font-family: 'Calibri';
+}
+h2, h3 {
+    padding: 10px;
+    background-color: #f7f4ed;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* #f7f4ed */
+/* #ADA996 */
+h2 {
+    max-width: 700px;
+    width: 70%;
+    margin: 0 auto;
+}
+form {
+    max-width: 700px;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+label {
+    margin-top: 5px;
+}
+
+input[type="range"] {
+    width: 50%;
+    background-color: #ADA996;
+}
+
+input[type="checkbox"]:hover,
+input[type="color"]:hover {
+    cursor: pointer;
+}
+#result {
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: 20px auto 35px;
+}
+textarea {
+    height: 50px;
+}

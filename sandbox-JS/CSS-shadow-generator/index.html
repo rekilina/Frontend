@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>CSS box-shadow Generator</h2>
+    <form action="">
+        <h3>Настройки</h3>
+
+        <div class="form-group">
+            <label for="inset">Тень внутри элемента?</label>
+            <input type="checkbox" name="" id="inset">
+        </div>
+
+        <label for="offsetX">Смещение по оси X</label>
+        <input type="range" id="offsetX" min="-25" max="25" step="1" value="0">
+
+        <label for="offsetY">Смещение по оси Y</label>
+        <input type="range" id="offsetY" min="-25" max="25" step="1" value="0">
+
+        <label for="blur">Размытие</label>
+        <input type="range" id="blur" min="0" max="25" step="1" value="8">
+
+        <label for="stretch">Растяжение</label>
+        <input type="range" id="stretch" min="-20" step="1" value="6">
+
+        <label for="color">Цвет</label>
+        <input type="color" id="color">
+
+        <label for="opacity">Прозрачность</label>
+        <input type="range" id="opacity" min="0" max="1" step="0.01" value="0.5">
+        
+        <h3>Результат</h3>
+        <div id="result"></div>
+        <textarea name="" readonly id="cssCode" cols="30" rows="10"></textarea>
+    </form>
+
+    <script src="index.js"></script>
+</body>
+</html>
