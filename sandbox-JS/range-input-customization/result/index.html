@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+body {
+    /* font-family: 'Playfair Display', serif; */
+    font-family: "Quicksand", sans-serif;
+}
+select {
+    font-family: "Quicksand", sans-serif;
+    padding: 3px;
+    font-size: 14px;
+}
+h1 {
+    line-height: 1;
+    margin: 20px 0;
+    text-shadow: 2px 1px 1px rgba(133, 126, 126, 0.67);
+    font-size: 30px;
+}
+h1, h2, h3 {
+    text-decoration: underline;
+}
+.container {
+    display: flex;
+}
+.settings {
+    width: 50%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+.result {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 500px;
+    position: fixed;
+    top: 68px;
+    left: 50%;
+}
+.input__item-column {
+    display: flex;
+    flex-direction: column;
+}
+input[type="color"] {
+    width: 50px;
+    padding: 2px;
+}
+.input__item-raw {
+    display: flex;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    align-items: center;
+    gap: 20px;
+}
+/* .input__item-raw > input {
+    margin: 0;
+} */
+input[type="checkbox"] {
+    margin-top: -2px;
+}
+.result__input {
+    width: 100%;
+}
+label {
+    margin-top: 10px;
+    font-size: 16px;
+}
+label.sub-text {
+    margin-top: 0;
+    font-size: 14px;
+}
+.input {
+    margin: 10px 0 15px;
+    width: 70%;
+    display: inline;
+}
+textarea {
+    /* position: fixed; */
+    bottom: 20px;
+    width: 90%;
+    resize: vertical;
+    min-height: 200px;
+    max-height: 700px;
+    margin-top: 50px;
+    /* overflow: scroll; */
+    /* position: relative;
+    top: 50px; */
+}
+/* -----------------------------Applying base CSS styles----------------------------------- */
+/* Several styles need to be applied 
+to range inputs in all browsers to override their basic appearance. */
+.result__input {
+    -webkit-appearance: none; /* Hides the bar of the slider so that custom slider can be made */
+    width: 90%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+}
+.result__input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+/* Removes the blue border. You should probably do some kind of focus styling 
+for accessibility reasons though. */
+.result__input:focus {
+    outline: none; 
+}
+.result__input::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+}
+/* This gives us invisible or unstyled range inputs in all browsers. 
+Now we can apply our custom styles. */
+/* ---------------------------------------------------------------------------------------- */
+:root {
+    --thumb-border-width: 1px;
+    --thumb-border-style: double;
+    --thumb-border-color: #0a181d;
+    --thumb-height: 36px;
+    --thumb-width: 20px;
+    --thumb-border-radius: 20px;
+    --thumb-background-color: #dfdfdf;
+    --thumb-box-shadow-offsetX: 1px;
+    --thumb-box-shadow-offsetY: 1px;
+    --thumb-box-shadow-blur: 2px;
+    --thumb-box-shadow-spread: 0px;
+    --thumb-box-shadow-color: rgb(0, 0, 0, 1);
+
+    --track-border-width: 1px;
+    --track-border-style: solid;
+    --track-border-color: #0a181d;
+    --track-height: 10px;
+    --track-border-radius: 5px;
+    --track-background-color: #ceede1;
+    --track-box-shadow-offsetX: 0px;
+    --track-box-shadow-offsetY: 0px;
+    --track-box-shadow-blur: 1px;
+    --track-box-shadow-spread: 0px;
+    --track-box-shadow-color: rgb(13, 13, 13, 1);
+    
+}
+/* ------------------------------Styling the Thumb----------------------------------------- */
+/* The widget that you click or drag along the track is called the thumb. 
+It can be styled just like a regular HTML element. */
+/*Special styling for WebKit/Blink */
+.result__input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: var(--thumb-border-width) var(--thumb-border-style) var(--thumb-border-color); 
+    height: var(--thumb-height);
+    width: var(--thumb-width);
+    border-radius: var(--thumb-border-radius);
+    background: var(--thumb-background-color);
+    cursor: pointer;
+    margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: var(--thumb-box-shadow-offsetX) var(--thumb-box-shadow-offsetY) var(--thumb-box-shadow-blur) var(--thumb-box-shadow-spread) var(--thumb-box-shadow-color); /* Add cool effects to your sliders! */
+}
+
+/* All the same stuff for Firefox */
+.result__input::-moz-range-thumb {
+    box-shadow: var(--thumb-box-shadow-offsetX) var(--thumb-box-shadow-offsetY) var(--thumb-box-shadow-blur) var(--thumb-box-shadow-spread) var(--thumb-box-shadow-color);
+    border: var(--thumb-border-width) var(--thumb-border-style) var(--thumb-border-color);;
+    height:  var(--thumb-height);
+    width: var(--thumb-width);
+    border-radius: var(--thumb-border-radius);
+    background: var(--thumb-background-color);
+    cursor: pointer;
+}
+
+/* All the same stuff for IE */
+.result__input::-ms-thumb {
+    box-shadow: var(--thumb-box-shadow-offsetX) var(--thumb-box-shadow-offsetY) var(--thumb-box-shadow-blur) var(--thumb-box-shadow-spread) var(--thumb-box-shadow-color);
+    border: var(--thumb-border-width) var(--thumb-border-style) var(--thumb-border-color);;
+    height:  var(--thumb-height);
+    width: var(--thumb-width);
+    border-radius: var(--thumb-border-radius);
+    background: var(--thumb-background-color);
+    cursor: pointer;
+}
+/* ---------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------- */
+
+.result__input::-webkit-slider-runnable-track {
+    height: var(--track-height);
+    cursor: pointer;
+    box-shadow: var(--track-box-shadow-offsetX) var(--track-box-shadow-offsetY) var(--track-box-shadow-blur) var(--track-box-shadow-spread) var(--track-box-shadow-color);
+    background: var(--track-background-color);
+    border-radius: 1.3px;
+    border: var(--track-border-width) var(--track-border-style) var(--track-border-color);
+  }
+  
+  .result__input:focus::-webkit-slider-runnable-track {
+    background: var(--track-background-color);
+  }
+  
+  .result__input::-moz-range-track {
+    height: var(--track-height);
+    cursor: pointer;
+    box-shadow: var(--track-box-shadow-offsetX) var(--track-box-shadow-offsetY) var(--track-box-shadow-blur) var(--track-box-shadow-spread) var(--track-box-shadow-color);
+    background: var(--track-background-color);
+    border-radius: var(--track-border-radius);
+    border: var(--track-border-width) var(--track-border-style) var(--track-border-color);
+  }
+  
+  .result__input::-ms-track {
+    height: var(--track-height);
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  .result__input::-ms-fill-lower {
+    background: var(--track-background-color);
+    border: var(--track-border-width) var(--track-border-style) var(--track-border-color);
+    border-radius: var(--track-border-radius);
+    box-shadow: var(--track-box-shadow-offsetX) var(--track-box-shadow-offsetY) var(--track-box-shadow-blur) var(--track-box-shadow-spread) var(--track-box-shadow-color);
+  }
+  .result__input:focus::-ms-fill-lower {
+    background: var(--track-background-color);
+  }
+  .result__input::-ms-fill-upper {
+    background: var(--track-background-color);
+    border: var(--track-border-width) var(--track-border-style) var(--track-border-color);
+    border-radius: var(--track-border-radius);
+    box-shadow: var(--track-box-shadow-offsetX) var(--track-box-shadow-offsetY) var(--track-box-shadow-blur) var(--track-box-shadow-spread) var(--track-box-shadow-color);
+  }
+  .result__input:focus::-ms-fill-upper {
+    background: var(--track-background-color);
+  }
+    </style>
+    <title>Customize Range</title>
+</head>
+<body>
+    <h1>Styling range inputs</h1>
+    <form class="container">
+        <div class="settings">
+            <h2>Styling the Thumb</h2>
+
+            <div class="input__item-column">
+                <label for="thumb-width">width</label>
+                <input type="range" class="input" name="" id="thumb-width" class="" min="0" max="30" step="1" value="20">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="thumb-height">height</label>
+                <input type="range" class="input" name="" id="thumb-height" class="" min="0" max="30" step="1" value="10">
+                <div class="input__item-raw">
+                    <label for="height-width" class="sub-text">Equal to width?</label>
+                    <input type="checkbox" id="height-width" checked>
+                </div>
+            </div>
+
+            <div class="input__item-raw">
+                <label for="thumb-background-color">background-color</label>
+                <input type="color" class="input" id="thumb-background-color" value="#dfdfdf">
+            </div>
+        
+            <h3>Thumb border</h3>
+
+            <div class="input__item-column">
+                <label for="thumb-border-width">border width</label>
+                <input type="range" class="input" name="" id="thumb-border-width" class="" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-border-style">border style</label>
+                <select name="" id="thumb-border-style" class="input select">
+                    <option value="solid">solid</option>
+                    <option value="dotted">dotted</option>
+                    <option value="dashed">dashed</option>
+                    <option value="double" selected>double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <!-- <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                    <option value="none">none</option>
+                    <option value="hidden">hidden</option> -->
+                </select>
+            </div>
+            
+            <div class="input__item-raw">
+                <label for="thumb-border-color">border-color</label>
+                <input type="color" class="input" id="thumb-border-color" value="#333333">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-border-radius">border-radius</label>
+                <input type="range" class="input" name="" id="thumb-border-radius" class="" min="0" max="50" step="1" value="20">
+            </div>
+    
+            <h3>Thumb box-shadow</h3>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-offsetX">Offset X</label>
+                <input type="range" class="input" id="thumb-box-shadow-offsetX" min="-10" max="10" step="1" value="0">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-offsetY">Offset Y</label>
+                <input type="range" class="input" id="thumb-box-shadow-offsetY" min="-10" max="10" step="1" value="0">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-blur">blur</label>
+                <input type="range" class="input" id="thumb-box-shadow-blur" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-spread">spread</label>
+                <input type="range" class="input" id="thumb-box-shadow-spread" min="0" max="5" step="1" value="0">
+            </div>            
+
+            <div class="input__item-raw">
+                <label for="thumb-box-shadow-color">color</label>
+                <input type="color" class="input" id="thumb-box-shadow-color">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-opacity">opacity</label>
+                <input type="range" class="input" id="thumb-box-shadow-opacity" min="0" max="1" step="0.01" value="0.5">
+            </div>
+            
+    
+            <h2>Styling the Track</h2>
+            
+            <div class="input__item-column">
+                <label for="track-height">height</label>
+                <input type="range" class="input" name="" id="track-height" class="" min="0" max="15" step="1" value="8">
+                <div class="input__item-raw">
+                    <label for="height-width" class="sub-text">Equal to width?</label>
+                    <input type="checkbox" id="height-width" checked>
+                </div>
+            </div>
+
+            <div class="input__item-raw">
+                <label for="track-background-color">background-color</label>
+                <input type="color" class="input" id="track-background-color" value="#ceede1">
+            </div>
+        
+            <h3>Track border</h3>
+
+            <div class="input__item-column">
+                <label for="track-border-width">border width</label>
+                <input type="range" class="input" name="" id="track-border-width" class="" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-border-style">border style</label>
+                <select name="" id="track-border-style" class="input select">
+                    <option value="solid">solid</option>
+                    <option value="dotted">dotted</option>
+                    <option value="dashed">dashed</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                </select>
+            </div>
+            
+            <div class="input__item-raw">
+                <label for="track-border-color">border-color</label>
+                <input type="color" class="input" id="track-border-color" value="#333333">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-border-radius">border-radius</label>
+                <input type="range" class="input" name="" id="track-border-radius" class="" min="0" max="50" step="1" value="5">
+            </div>
+    
+            <h3>Track box-shadow</h3>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-offsetX">Offset X</label>
+                <input type="range" class="input" id="track-box-shadow-offsetX" min="-10" max="10" step="1" value="0">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="track-box-shadow-offsetY">Offset Y</label>
+                <input type="range" class="input" id="track-box-shadow-offsetY" min="-10" max="10" step="1" value="0">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-blur">blur</label>
+                <input type="range" class="input" id="track-box-shadow-blur" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-spread">spread</label>
+                <input type="range" class="input" id="track-box-shadow-spread" min="0" max="5" step="1" value="0">
+            </div>            
+
+            <div class="input__item-raw">
+                <label for="track-box-shadow-color">color</label>
+                <input type="color" class="input" id="track-box-shadow-color">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-opacity">opacity</label>
+                <input type="range" class="input" id="track-box-shadow-opacity" min="0" max="1" step="0.01" value="0.5">
+            </div>
+
+        </div>
+        <div class="result">
+            <h2>Result</h2>
+            <label for="result" class="result__label"></label>
+            <input type="range" name="" id="result" class="result__input input">
+            <textarea name="" readonly id="cssCode" cols="30" rows="10"></textarea>
+        </div>        
+    </form>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script>
+        
+function $$(selector, where = document) {
+    return where.getElementById(selector);
+}
+function getColor (color) {
+    let red, green, blue;
+    red = parseInt(color.slice(1,3), 16);
+    green = parseInt(color.slice(3,5), 16);
+    blue = parseInt(color.slice(5,7), 16);
+    return {r: red, g: green, b: blue};
+}
+function generateCss() {
+    let thumb_width, thumb_height, height_width, thumb_background_color, thumb_border_width, thumb_border_style, thumb_border_color, thumb_border_radius, thumb_box_shadow_offsetX, 
+    thumb_box_shadow_offsetY, thumb_box_shadow_blur, thumb_box_shadow_spread, thumb_box_shadow_color, thumb_box_shadow_opacity;
+
+    thumb_width = $$("thumb-width");
+    thumb_height = $$("thumb-height");
+    let thumb_height_value;
+    height_width = $$("height-width");
+    if(height_width.checked) {
+        thumb_height_value = thumb_width.value;
+    } else {
+        thumb_height_value = thumb_height.value;
+    }
+    thumb_border_width = $$("thumb-border-width");
+    thumb_border_style = $$("thumb-border-style");
+    thumb_border_color = $$("thumb-border-color");
+    thumb_border_radius = $$("thumb-border-radius");
+    thumb_box_shadow_offsetX = $$("thumb-box-shadow-offsetX");
+    thumb_box_shadow_offsetY = $$("thumb-box-shadow-offsetY");
+    thumb_box_shadow_blur = $$("thumb-box-shadow-blur");
+    thumb_box_shadow_spread = $$("thumb-box-shadow-spread");
+    thumb_box_shadow_color = $$("thumb-box-shadow-color");
+    thumb_background_color = $$("thumb-background-color");
+    thumb_box_shadow_opacity = $$("thumb-box-shadow-opacity");
+
+    
+    let  track_height, track_background_color, track_border_width, track_border_style, track_border_color, track_border_radius, track_box_shadow_offsetX, 
+    track_box_shadow_offsetY, track_box_shadow_blur, track_box_shadow_spread, track_box_shadow_color, track_box_shadow_opacity;
+
+    track_height = $$("track-height");
+    track_border_width = $$("track-border-width");
+    track_border_style = $$("track-border-style");
+    track_border_color = $$("track-border-color");
+    track_border_radius = $$("track-border-radius");
+    track_box_shadow_offsetX = $$("track-box-shadow-offsetX");
+    track_box_shadow_offsetY = $$("track-box-shadow-offsetY");
+    track_box_shadow_blur = $$("track-box-shadow-blur");
+    track_box_shadow_spread = $$("track-box-shadow-spread");
+    track_box_shadow_color = $$("track-box-shadow-color");
+    track_background_color = $$("track-background-color");
+    track_box_shadow_opacity = $$("track-box-shadow-opacity");
+    
+   
+   
+    let textarea = document.getElementById('cssCode');
+     let cssContent = `input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: ${thumb_border_width.value}px ${thumb_border_style.options[thumb_border_style.selectedIndex].value} ${thumb_border_color.value}; 
+    height: ${thumb_height_value}px;
+    width: ${thumb_width.value}px;
+    border-radius: ${thumb_border_radius.value}px;
+    background: ${thumb_background_color.value};
+    cursor: pointer;
+    margin-top: -14px; 
+    box-shadow: ${thumb_box_shadow_offsetX.value}px ${thumb_box_shadow_offsetY.value}px ${thumb_box_shadow_blur.value}px ${thumb_box_shadow_spread.value}px rgba(${getColor(thumb_box_shadow_color.value).r}, ${getColor(thumb_box_shadow_color.value).g}, ${getColor(thumb_box_shadow_color.value).b}, ${thumb_box_shadow_opacity.value});
+    }
+input[type="range"]::-moz-range-thumb {
+    box-shadow: ${thumb_box_shadow_offsetX.value}px ${thumb_box_shadow_offsetY.value}px ${thumb_box_shadow_blur.value}px ${thumb_box_shadow_spread.value}px rgba(${getColor(thumb_box_shadow_color.value).r}, ${getColor(thumb_box_shadow_color.value).g}, ${getColor(thumb_box_shadow_color.value).b}, ${thumb_box_shadow_opacity.value});
+    border: ${thumb_border_width.value}px ${thumb_border_style.options[thumb_border_style.selectedIndex].value} ${thumb_border_color.value}; 
+    height: ${thumb_height_value}px;
+    width: ${thumb_width.value}px;
+    border-radius: ${thumb_border_radius.value}px;
+    background: ${thumb_background_color.value};
+    cursor: pointer;
+}
+input[type="range"]::-ms-thumb {
+    box-shadow: ${thumb_box_shadow_offsetX.value}px ${thumb_box_shadow_offsetY.value}px ${thumb_box_shadow_blur.value}px ${thumb_box_shadow_spread.value}px rgba(${getColor(thumb_box_shadow_color.value).r}, ${getColor(thumb_box_shadow_color.value).g}, ${getColor(thumb_box_shadow_color.value).b}, ${thumb_box_shadow_opacity.value});
+    border: ${thumb_border_width.value}px ${thumb_border_style.options[thumb_border_style.selectedIndex].value} ${thumb_border_color.value}; 
+    height: ${thumb_height_value}px;
+    width: ${thumb_width.value}px;
+    border-radius: ${thumb_border_radius.value}px;
+    background: ${thumb_background_color.value};
+    cursor: pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    height: ${track_height.value}px;
+    cursor: pointer;
+    box-shadow: ${track_box_shadow_offsetX.value}px ${track_box_shadow_offsetY.value}px ${track_box_shadow_blur.value}px ${track_box_shadow_spread.value}px rgba(${getColor(track_box_shadow_color.value).r}, ${getColor(track_box_shadow_color.value).g}, ${getColor(track_box_shadow_color.value).b}, ${track_box_shadow_opacity.value});
+    background: ${track_background_color.value};
+    border-radius: ${track_border_radius.value}px;
+    border: ${track_border_width.value}px ${track_border_style.options[track_border_style.selectedIndex].value} ${track_border_color.value};
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #367ebd;
+}
+input[type=range]::-moz-range-track {
+    height: ${track_height.value}px;
+    cursor: pointer;
+    box-shadow: ${track_box_shadow_offsetX.value}px ${track_box_shadow_offsetY.value}px ${track_box_shadow_blur.value}px ${track_box_shadow_spread.value}px rgba(${getColor(track_box_shadow_color.value).r}, ${getColor(track_box_shadow_color.value).g}, ${getColor(track_box_shadow_color.value).b}, ${track_box_shadow_opacity.value});
+    background: ${track_background_color.value};
+    border-radius: ${track_border_radius.value}px;
+    border: ${track_border_width.value}px ${track_border_style.options[track_border_style.selectedIndex].value} ${track_border_color.value};
+}
+input[type=range]::-ms-track {
+    height: ${track_height.value}px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: ${track_background_color.value};
+    border: ${track_border_width.value}px ${track_border_style.options[track_border_style.selectedIndex].value} ${track_border_color.value};
+    border-radius: ${2*track_border_radius.value}px;
+    box-shadow: ${track_box_shadow_offsetX.value}px ${track_box_shadow_offsetY.value}px ${track_box_shadow_blur.value}px ${track_box_shadow_spread.value}px rgba(${getColor(track_box_shadow_color.value).r}, ${getColor(track_box_shadow_color.value).g}, ${getColor(track_box_shadow_color.value).b}, ${track_box_shadow_opacity.value});
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: ${track_background_color.value};
+  }
+  input[type=range]::-ms-fill-upper {
+    background: ${track_background_color.value};
+    border: ${track_border_width.value}px ${track_border_style.options[track_border_style.selectedIndex].value} ${track_border_color.value};
+    border-radius: ${2*track_border_radius.value}px;
+    box-shadow: ${track_box_shadow_offsetX.value}px ${track_box_shadow_offsetY.value}px ${track_box_shadow_blur.value}px ${track_box_shadow_spread.value}px rgba(${getColor(track_box_shadow_color.value).r}, ${getColor(track_box_shadow_color.value).g}, ${getColor(track_box_shadow_color.value).b}, ${track_box_shadow_opacity.value});
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: ${track_background_color.value};
+  }
+`
+    
+    textarea.value = cssContent;
+
+    let result = $$('result');
+    result.style.setProperty( '--thumb-border-width', `${thumb_border_width.value}px`);
+    result.style.setProperty( '--thumb-border-style', `${thumb_border_style.options[thumb_border_style.selectedIndex].value}`);
+    result.style.setProperty( '--thumb-border-color', `${thumb_border_color.value}`);
+    result.style.setProperty( '--thumb-height', `${thumb_height_value}px`);
+    result.style.setProperty( '--thumb-width', `${thumb_width.value}px`);
+    result.style.setProperty( '--thumb-border-radius', `${thumb_border_radius.value}px`);
+    result.style.setProperty( '--thumb-background-color', `${thumb_background_color.value}`);
+    result.style.setProperty( '--thumb-box-shadow-offsetX', `${thumb_box_shadow_offsetX.value}px`);
+    result.style.setProperty( '--thumb-box-shadow-offsetY', `${thumb_box_shadow_offsetY.value}px`);
+    result.style.setProperty( '--thumb-box-shadow-blur', `${thumb_box_shadow_blur.value}px`);
+    result.style.setProperty( '--thumb-box-shadow-spread', `${thumb_box_shadow_spread.value}px`);
+    result.style.setProperty( '--thumb-box-shadow-color', `rgba(${getColor(thumb_box_shadow_color.value).r}, ${getColor(thumb_box_shadow_color.value).g}, ${getColor(thumb_box_shadow_color.value).b}, ${thumb_box_shadow_opacity.value})`);
+
+    result.style.setProperty( '--track-border-width', `${track_border_width.value}px`);
+    result.style.setProperty( '--track-border-style', `${track_border_style.options[track_border_style.selectedIndex].value}`);
+    result.style.setProperty( '--track-border-color', `${track_border_color.value}`);
+    result.style.setProperty( '--track-height', `${track_height.value}px`);
+    result.style.setProperty( '--track-border-radius', `${track_border_radius.value}px`);
+    result.style.setProperty( '--track-background-color', `${track_background_color.value}`);
+    result.style.setProperty( '--track-box-shadow-offsetX', `${track_box_shadow_offsetX.value}px`);
+    result.style.setProperty( '--track-box-shadow-offsetY', `${track_box_shadow_offsetY.value}px`);
+    result.style.setProperty( '--track-box-shadow-blur', `${track_box_shadow_blur.value}px`);
+    result.style.setProperty( '--track-box-shadow-spread', `${track_box_shadow_spread.value}px`);
+    result.style.setProperty( '--track-box-shadow-color', `rgba(${getColor(track_box_shadow_color.value).r}, ${getColor(track_box_shadow_color.value).g}, ${getColor(track_box_shadow_color.value).b}, ${track_box_shadow_opacity.value})`);
+
+      
+}
+document.querySelector('select').addEventListener('input', generateCss);
+
+for (let item of document.querySelectorAll('input')) {
+    item.addEventListener('input', generateCss);
+}
+
+generateCss();
+    </script>
+</body>
+</html>
