@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Customize Range</title>
+</head>
+<body>
+    <h1>Styling range inputs</h1>
+    <form class="container">
+        <div class="settings">
+            <h2>Styling the Thumb</h2>
+
+            <div class="input__item-column">
+                <label for="thumb-width">width</label>
+                <input type="range" class="input" name="" id="thumb-width" class="" min="0" max="30" step="1" value="20">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="thumb-height">height</label>
+                <input type="range" class="input" name="" id="thumb-height" class="" min="0" max="30" step="1" value="10">
+                <div class="input__item-raw">
+                    <label for="height-width" class="sub-text">Equal to width?</label>
+                    <input type="checkbox" id="height-width" checked>
+                </div>
+            </div>
+
+            <div class="input__item-raw">
+                <label for="thumb-background-color">background-color</label>
+                <input type="color" class="input" id="thumb-background-color" value="#dfdfdf">
+            </div>
+        
+            <h3>Thumb border</h3>
+
+            <div class="input__item-column">
+                <label for="thumb-border-width">border width</label>
+                <input type="range" class="input" name="" id="thumb-border-width" class="" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-border-style">border style</label>
+                <select name="" id="thumb-border-style" class="input select">
+                    <option value="solid">solid</option>
+                    <option value="dotted">dotted</option>
+                    <option value="dashed">dashed</option>
+                    <option value="double" selected>double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <!-- <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                    <option value="none">none</option>
+                    <option value="hidden">hidden</option> -->
+                </select>
+            </div>
+            
+            <div class="input__item-raw">
+                <label for="thumb-border-color">border-color</label>
+                <input type="color" class="input" id="thumb-border-color" value="#333333">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-border-radius">border-radius</label>
+                <input type="range" class="input" name="" id="thumb-border-radius" class="" min="0" max="50" step="1" value="20">
+            </div>
+    
+            <h3>Thumb box-shadow</h3>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-offsetX">Offset X</label>
+                <input type="range" class="input" id="thumb-box-shadow-offsetX" min="-10" max="10" step="1" value="0">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-offsetY">Offset Y</label>
+                <input type="range" class="input" id="thumb-box-shadow-offsetY" min="-10" max="10" step="1" value="0">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-blur">blur</label>
+                <input type="range" class="input" id="thumb-box-shadow-blur" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-spread">spread</label>
+                <input type="range" class="input" id="thumb-box-shadow-spread" min="0" max="5" step="1" value="0">
+            </div>            
+
+            <div class="input__item-raw">
+                <label for="thumb-box-shadow-color">color</label>
+                <input type="color" class="input" id="thumb-box-shadow-color">
+            </div>
+
+            <div class="input__item-column">
+                <label for="thumb-box-shadow-opacity">opacity</label>
+                <input type="range" class="input" id="thumb-box-shadow-opacity" min="0" max="1" step="0.01" value="0.5">
+            </div>
+            
+    
+            
+    
+            <h2>Styling the Track</h2>
+            
+            <div class="input__item-column">
+                <label for="track-height">height</label>
+                <input type="range" class="input" name="" id="track-height" class="" min="0" max="15" step="1" value="8">
+                <div class="input__item-raw">
+                    <label for="height-width" class="sub-text">Equal to width?</label>
+                    <input type="checkbox" id="height-width" checked>
+                </div>
+            </div>
+
+            <div class="input__item-raw">
+                <label for="track-background-color">background-color</label>
+                <input type="color" class="input" id="track-background-color" value="#ceede1">
+            </div>
+        
+            <h3>Track border</h3>
+
+            <div class="input__item-column">
+                <label for="track-border-width">border width</label>
+                <input type="range" class="input" name="" id="track-border-width" class="" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-border-style">border style</label>
+                <select name="" id="track-border-style" class="input select">
+                    <option value="solid">solid</option>
+                    <option value="dotted">dotted</option>
+                    <option value="dashed">dashed</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                </select>
+            </div>
+            
+            <div class="input__item-raw">
+                <label for="track-border-color">border-color</label>
+                <input type="color" class="input" id="track-border-color" value="#333333">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-border-radius">border-radius</label>
+                <input type="range" class="input" name="" id="track-border-radius" class="" min="0" max="50" step="1" value="5">
+            </div>
+    
+            <h3>track box-shadow</h3>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-offsetX">Offset X</label>
+                <input type="range" class="input" id="track-box-shadow-offsetX" min="-10" max="10" step="1" value="0">
+            </div>
+            
+            <div class="input__item-column">
+                <label for="track-box-shadow-offsetY">Offset Y</label>
+                <input type="range" class="input" id="track-box-shadow-offsetY" min="-10" max="10" step="1" value="0">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-blur">blur</label>
+                <input type="range" class="input" id="track-box-shadow-blur" min="0" max="10" step="1" value="1">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-spread">spread</label>
+                <input type="range" class="input" id="track-box-shadow-spread" min="0" max="5" step="1" value="0">
+            </div>            
+
+            <div class="input__item-raw">
+                <label for="track-box-shadow-color">color</label>
+                <input type="color" class="input" id="track-box-shadow-color">
+            </div>
+
+            <div class="input__item-column">
+                <label for="track-box-shadow-opacity">opacity</label>
+                <input type="range" class="input" id="track-box-shadow-opacity" min="0" max="1" step="0.01" value="0.5">
+            </div>
+
+        </div>
+        <div class="result">
+            <h2>Result</h2>
+            <label for="result" class="result__label"></label>
+            <input type="range" name="" id="result" class="result__input input">
+            <textarea name="" readonly id="cssCode" cols="30" rows="10"></textarea>
+        </div>        
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
