@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="">+7(995)-125-78-96</a>
+    <script>
+        // Создание регулярношл выражения через конструкор класса
+        // let regexp = new RegExp("",)
+        // let regexp = /шаблон/флаги;
+        // let tag = prompt("Enter HTML tag", "h2");
+        // let regexp = new RegExp(`<${tag}>`);
+        // console.log(regexp);
+        // ФЛАГИ
+        // i - независимо от регистра
+        // g - все совпадения, а не только первое
+        // m - многострочный режим
+        // s - режим dotal, точка может соответствовать символу переводу строки
+        // u - полная поддержка юникода
+        // y - поиск конкретной позиции в тексте
+        let str = 'Строка, еще одна строка';
+        console.log(str.match(/Строка/gi));
+        console.log(str.replace(/строка/g, "$& 1"));
+        console.log(str.replace(/строка/gi.test(str)));
+
+        // Автоматически с помощью регулярного выражения подставим обработанный номер телефона
+        let phone = document.querySelector('a') .textContent;
+        let phone_regexp = /\d/g;
+        let number = '+' + phone.match(phone_regexp).join('');
+        // the other way
+        // заменить все символы, которые не являются числами от 0 до 9 на пустую строку
+        number = str.replace(/\D/g, ""); 
+        console.log(number);
+        console.log(typeof(number));
+        document.querySelector('a').setAttribute('href', 'tel:'+number);
+
+        // Символы, которые надо экранировать [ \ ^ $  | ? * + () 
+        // Сели ищем отдельные слова, ограждаем их \bслово\b
+
+
+        // Наборы и диапазоны
+        console.log("16 45 56 76".match(/[15]6/g));
+        console.log("16 45 56 76 96".match(/[1-8]6/g));
+
+        // Email Validation
+        console.log("email@yandex.ru @ email@mail.ru.com".match(/[-.\w]+@([\w-]+\.)+[\w-]+/g));
+
+        // Именуем группы
+        let tag = "azc".match(/a(?<first>z)(?<second>c)?/);
+        console.log(tag.groups.first);
+
+        // Ищем слова с кавычках
+        console.log(`He said: "She's the one!"`.match(/['"](.*?)['"]/g));
+        // \1 Найти тоже самое что в первой скобочной группе
+        console.log(`He said: "She's the one!"`.match(/(['"])(.*?)\1/g));
+        // \k<имя_группы>
+        console.log(`He said: "She's the one!"`.match(/(?<first>['"])(.*?)\k<first>/g));
+
+
+        // Опережающая проверка
+        // Найти X, за которым следует Y
+        // X(?=Y)
+        // За которым НЕ следует
+        // X(?<=Y)
+        console.log("Price 5$".match(/\d+(?=\$)/));
+
+        // Ретроспективная проверка
+        // (?!Y)X найти X, который следует за Y
+        console.log("Price is $5 or €4".match(/(?!\$)\d+/))
+        // Негативная ретроспективная проверка
+        // (?<!Y)X найти X, который НЕ следует за Y
+        console.log("Price is $5 or €4".match(/(?<!\$)\d+/))
+
+        // Скобочные группы
+        // \d+ любое количество чисел, kr - скобочная группа
+        console.log("Price 5$".match(/\d+(?=(\$|kr))/));
+
+        // Флаг y
+        let stry = 'let varName = "value"';
+        let regexpy = /\w+/y;
+        regexpy.lastIndex = 3;
+        console.log(regexpy.exec(stry));
+        regexpy.lastIndex = 4;
+        console.log(regexpy.exec(stry));
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
