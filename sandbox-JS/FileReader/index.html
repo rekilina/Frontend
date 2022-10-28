@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Считывать файлы (например, которые были загружены через input форму) c помощью JS можно,
+    а вот записывать фалйы нельзя, посколько JS не имеет доступа к файловой системе,
+    для этого нужен сервер, который можно создать на Node.js  -->
+
+    <input type="file" name="" id="" onchange="openFile(this)">
+    <!-- 
+    В качестве аргумента функции обаботчику передается сам input, в который загрузили файл,
+    то есть в котором произошло изменение и сработал onchange -->
+
+    <script>
+        function openFile(input) {
+            let file = input.files[0];
+            // console.log(file.name); // works
+            // TimeStamp последнего изменения файла.
+            // console.log(file.lastModified); // works
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function() {
+                console.log(reader.result)
+            }
+            reader.onerror = function() {
+                console.log(reader.error)
+            }
+        }
+    </script>
+
+</body>
+</html>
