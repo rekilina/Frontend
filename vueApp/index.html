@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Game</title>
+</head>
+
+<body>
+    <main class="main">
+        <div class="app" v-show="showMain">
+            <div class="app__header">
+                <img src="img/logo.png" alt="" class="app__logo">
+            </div>
+            <div class="app__body">
+                <button class="app__btn" @click="goToQuestion">
+                    <i class="fa fa-play-circle-o" area-hidden="true"></i>
+                    <div class="app__btn-text">Начать</div>
+                </button>
+                <button class="app__btn" @click="goToAchievement">
+                    <i class="fa fa-play-circle-o" area-hidden="true"></i>
+                    <div class="app__btn-text">Достижения</div>
+                </button>
+                <button class="app__btn" @click="goToSocial">
+                    <i class="fa fa-play-circle-o" area-hidden="true"></i>
+                    <div class="app__btn-text">Автор</div>
+                </button>
+                <button class="app__btn btn__sound">
+                    <i class="fa fa-volume-up" area-hidden="true"></i>
+                    <div class="app__btn-text">Звук</div>
+                </button>
+            </div>
+        </div>
+        <div class="app achievements" v-show="showAchievement">
+            <div class="app__body">
+                <div class="app__body-inner">
+                    <h2 class="app__body-title">
+                        <i class="fa fa-trophy" area-hidden="true"></i>
+                        Достижения
+                    </h2>
+                    <div class="app__body-top">
+                        <div class="app__card">
+                            <div class="app__card-text">Счет</div>
+                            <div class="app__card__count">{{ totalScore }}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card-text">Открыто расс</div>
+                            <div class="app__card__count">{{ totalRace }}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card-text">Всего игр</div>
+                            <div class="app__card__count">{{ totalGames }}</div>
+                        </div>
+                        <div class="app__card">
+                            <div class="app__card-text">Любимая расса</div>
+                            <div class="app__card__count">{{favoriteRace}}</div>
+                        </div>
+                    </div>
+                    <div class="app__body-middle">
+                        <div class="app__result"
+                        v-for="(race, k) in results"
+                        v-show="showResultRace[k]"
+                        @click="goToResult(k)">
+                            <div class="app__result-score">
+                                <i class="fa fa-star" area-hidden="true"></i>
+                                <div class="app__result-count">{{ race.points }}</div>
+                            </div>
+                            <div class="app__result-name">{{ race.name }}</div>
+                            <div class="app__result-amount">{{ totalGame[k] }}</div>
+                        </div>
+                    </div>
+                    <div class="app__body-bottom">
+                        <button class="app__body-btn btn__back btn__achievement" @click="goToMain">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app" v-show="showQuestion">
+            <div class="app__header">
+                <div class="app__header-inner">
+                    <div class="app__count"># {{ numberQuestion + 1 }}</div>
+                    <div class="app__text">{{ questions[numberQuestion][0] }}</div>
+                </div>
+            </div>
+            <div class="app__body">
+                <div class="app__btn" v-for="(answer, i) in questions[numberQuestion][1]"
+                    @click="nextQuestion(questions[numberQuestion][2][i])">
+                    <div class="app__btn-text">{{answer}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="app" v-show="showSocial">
+            <div class="app__body">
+                <a href="#" class="app__btn">
+                    <i class="fa fa-instagram" area-hidden="true"></i>
+                    <div class="app__btn-text">Instagram</div>
+                </a>
+                <a href="#" class="app__btn">
+                    <i class="fa fa-twitter" area-hidden="true"></i>
+                    <div class="app__btn-text">Twitter</div>
+                </a>
+                <a href="#" class="app__btn">
+                    <i class="fa fa-vk" area-hidden="true"></i>
+                    <div class="app__btn-text">Vkontakte</div>
+                </a>
+                <a href="#" class="app__btn">
+                    <i class="fa fa-facebook" area-hidden="true"></i>
+                    <div class="app__btn-text">Facebook</div>
+                </a>
+                <a href="#" class="app__btn">
+                    <i class="fa fa-youtube" area-hidden="true"></i>
+                    <div class="app__btn-text">Youtube</div>
+                </a>
+                <button class="app__btn btn__back" @click="goToMain">
+                    <i class="fa fa-reply" area-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="app results" v-bind:data-race="resultRace" v-show="showResult">
+            <div class="app__body">
+                <div class="app__results-inner">
+                    <div class="results__title">
+                        <p class="results__title-text">
+                            {{ results[resultRace].name }}
+                        </p>
+                    </div>
+                    <div class="results__img">
+                        <img v-bind:src="'img/' + resultRace +'_logo.png'" alt="logo">
+                    </div>
+                    <div class="results__text-box">
+                        <p class="results__text">
+                            {{ results[resultRace].description }}
+                        </p>
+                        <p class="results__quote">
+                            {{ results[resultRace].quote1 }}
+                        </p>
+                        <p class="results__quote">
+                            {{ results[resultRace].quote2 }}
+                        </p>
+                        <p class="results__author">
+                            {{ results[resultRace].author }}
+                        </p>
+                    </div>
+                    <button v-bind:class="'app__btn btn__back btn__' + resultRace" @click="goToAchievement">
+                        <i class="fa fa-reply" area-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/vue.js"></script>
+    <script src="js/const.js"></script>
+
+    <script>
+        let app = new Vue({
+            el: '.main',
+            data: {
+                showMain: true,
+                showSocial: false,
+                showAchievement: false,
+                showQuestion: false,
+                showResult: false,
+                numberQuestion: 0,
+                score: {
+                    'zerg': 0,
+                    'primal': 0,
+                    'protoss': 0,
+                    'taldarim': 0,
+                    'terran': 0,
+                },
+                totalGame: localStorage.getItem('sc2ToalGame') ? JSON.parse(localStorage.getItem('sc2ToalGame')) : {
+                    'zerg': 0,
+                    'primal': 0,
+                    'protoss': 0,
+                    'taldarim': 0,
+                    'terran': 0,
+                    'infested': 0,
+                    'hybrid': 0,
+                },
+                totalGames: localStorage.getItem('sc2TotalGames') ? localStorage.getItem('sc2TotalGames') : 0,
+                questions: questions,
+                results: results,
+                resultRace: 'infested',
+            },
+            methods: {
+                goToMain() {
+                    this.showMain = true;
+                    this.showSocial = false;
+                    this.showAchievement = false;
+                    this.showQuestion = false;
+                    this.showResult = false;
+                },
+                goToSocial() {
+                    this.showMain = false;
+                    this.showSocial = true;
+                    this.showAchievement = false;
+                    this.showQuestion = false;
+                    this.showResult = false;
+                },
+                goToAchievement() {
+                    if (this.totalGames > 0) {
+                        this.showMain = false;
+                        this.showSocial = false;
+                        this.showAchievement = true;
+                        this.showQuestion = false;
+                        this.showResult = false;
+                    } else {
+                        this.goToQuestion();
+                    }
+                },
+                goToQuestion() {
+                    this.score = {
+                        'zerg': 0,
+                        'primal': 0,
+                        'protoss': 0,
+                        'taldarim': 0,
+                        'terran': 0,
+                    };
+                    this.showMain = false;
+                    this.showSocial = false;
+                    this.showAchievement = false;
+                    this.showQuestion = true;
+                    this.showResult = false;
+                },
+                goToResult(race) {
+                    this.showMain = false;
+                    this.showSocial = false;
+                    this.showAchievement = false;
+                    this.showQuestion = false;
+                    this.showResult = true;
+                    this.resultRace = race;
+                },
+                nextQuestion(answer) {
+                    if (this.numberQuestion == 24) {
+                        this.numberQuestion = 0
+                        this.endGame();
+                    } else {
+                        this.numberQuestion++;
+                    }
+                    eval(answer);
+                },
+                endGame() {
+                    this.totalGames++;
+                    localStorage.setItem('sc2TotalGames', this.totalGames);
+                    // Zerg
+                    if (this.score.zerg > this.score.protoss &&
+                        this.score.zerg > this.score.terran &&
+                        this.score.primal < 8 &&
+                        Math.abs(this.score.protoss - this.score.zerg) > 3) {
+                        this.goToResult('zerg');
+                        this.totalGame.zerg++;
+                    }
+                    // Primal
+                    else if (this.score.primal > this.score.protoss &&
+                        this.score.primal > this.score.terran &&
+                        this.score.primal == 8) {
+                        this.goToResult('primal');
+                        this.totalGame.primal++;
+                    }
+                    // Protoss
+                    else if (this.score.protoss > this.score.zerg &&
+                        this.score.protoss > this.score.terran &&
+                        this.score.taldarim < 5 &&
+                        Math.abs(this.score.protoss - this.score.zerg) > 3) {
+                        this.goToResult('protoss');
+                        this.totalGame.protoss++;
+                    }
+                    // Terran
+                    else if (this.score.terran > this.score.zerg &&
+                        this.score.terran > this.score.protoss &&
+                        this.score.taldarim == 5) {
+                        this.goToResult('terran');
+                        this.totalGame.terran++;
+                    }
+                    // Hybrid
+                    else if (Math.abs(this.score.protoss - this.score.zerg) <= 3) {
+                        this.goToResult('hybrid');
+                        this.totalGame.hybrid++;
+                    }
+                    else {
+                        this.goToResult('infested');
+                        this.totalGame.infested++;
+                    }
+                    localStorage.setItem('sc2TotalGame', JSON.stringify(this.totalGame));
+                },
+            },
+            computed: {
+                totalScore() {
+                    let score = 0
+                    for (let i in this.totalGame) {
+                        score += (this.totalGame[i] * results[i].points)
+                    }
+                    return score
+                },
+                totalRace() {
+                    let count = 0
+                    for (let i in this.totalGame) {
+                        if (this.totalGame[i] > 0) count++
+                    }
+                    return count
+                },
+                favoriteRace() {
+                    let max = 'zerg'
+                    for (let i in this.totalGame) {
+                        if (this.totalGame[i] > this.totalGame[max]) {
+                            max = i
+                        }
+                    }
+                    return results[max].name
+                },
+                showResultRace() {
+                    return {
+                        'zerg': this.totalGame.zerg > 0 ? true : false,
+                        'primal': this.totalGame.primal > 0 ? true : false,
+                        'protoss': this.totalGame.protoss > 0 ? true : false,
+                        'taldarim': this.totalGame.taldarim > 0 ? true : false,
+                        'terran': this.totalGame.terran > 0 ? true : false,
+                        'infested': this.totalGame.infested > 0 ? true : false,
+                        'hybrid': this.totalGame.hybrid > 0 ? true : false,
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
