@@ -105,9 +105,7 @@ class ProjectItem extends Component {
         event.dataTransfer.setData('text/plain', this.project.id);
         event.dataTransfer.effectAllowed = 'move';
     }
-    dragEndHandler(event) {
-        console.log('drag end', event);
-    }
+    dragEndHandler(event) { }
 }
 __decorate([
     autobind,
@@ -174,19 +172,16 @@ class ProjectList extends Component {
             event.preventDefault();
             const listEl = this.element.querySelector('ul');
             listEl.classList.add('droppable');
-            console.log(event);
         }
     }
     dragLeaveHandler(event) {
         const listEl = this.element.querySelector('ul');
         listEl.classList.remove('droppable');
-        console.log(event);
     }
     dropHandler(event) {
         const prjId = event.dataTransfer.getData('text/plain');
         const newStatus = this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished;
         projectState.moveProject(prjId, newStatus);
-        console.log(event);
     }
 }
 __decorate([

@@ -156,9 +156,7 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
 	}
 
 	@autobind
-	dragEndHandler(event: DragEvent): void {
-		console.log('drag end');
-	}
+	dragEndHandler(event: DragEvent): void { }
 
 }
 
