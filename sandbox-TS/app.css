@@ -126,3 +126,7 @@ button:active {
   background: #f7f7f7;
   max-width: calc(32em);
 }
+
+section {
+  max-width: 32rem;
+}
