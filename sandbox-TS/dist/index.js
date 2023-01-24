@@ -8,21 +8,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-function Logger(constructor) {
-    console.log("Logging...");
-    console.log(constructor);
-}
-let Person = class Person {
-    constructor() {
-        this.name = "Max";
-        console.log("In Person constructor");
+function validate(ValidatableInput) {
+    let isValid = true;
+    if (ValidatableInput.required) {
+        isValid = isValid && ValidatableInput.value.toString().trim().length !== 0;
     }
-};
-Person = __decorate([
-    Logger,
-    __metadata("design:paramtypes", [])
-], Person);
-const person = new Person();
+    if (ValidatableInput.minLength !== undefined &&
+        typeof ValidatableInput.value === 'string') {
+        isValid = isValid &&
+            ValidatableInput.value.toString().trim().length >= ValidatableInput.minLength;
+    }
+    if (ValidatableInput.maxLength !== undefined &&
+        typeof ValidatableInput.value === 'string') {
+        isValid = isValid &&
+            ValidatableInput.value.toString().trim().length <= ValidatableInput.maxLength;
+    }
+    if (ValidatableInput.min != undefined
+        && typeof ValidatableInput.value === 'number') {
+        isValid = isValid &&
+            ValidatableInput.value >= ValidatableInput.min;
+    }
+    if (ValidatableInput.max != undefined
+        && typeof ValidatableInput.value === 'number') {
+        isValid = isValid &&
+            ValidatableInput.value <= ValidatableInput.max;
+    }
+    return isValid;
+}
 function autobind(_, _2, descriptor) {
     const originalMethod = descriptor.value;
     const adjDescriptor = {
@@ -47,9 +59,48 @@ class ProjectInput {
         this.configure();
         this.attach();
     }
+    gatherUserInput() {
+        const enteredTitle = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = this.peopleInputElement.value;
+        const titleValidatable = {
+            value: enteredTitle,
+            required: true
+        };
+        const descriptionValidatable = {
+            value: enteredDescription,
+            required: true,
+            minLength: 5
+        };
+        const peopleValidatable = {
+            value: +enteredPeople,
+            required: true,
+            min: 1,
+            max: 8
+        };
+        if (!validate(titleValidatable) ||
+            !validate(descriptionValidatable) ||
+            !validate(peopleValidatable)) {
+            alert('Invalid input');
+        }
+        else {
+            return [enteredTitle, enteredDescription, +enteredPeople];
+        }
+    }
+    clearInputs() {
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
+    }
     submitHandler(event) {
         event.preventDefault();
         console.log(this.titleInputElement.value);
+        const userInput = this.gatherUserInput();
+        if (Array.isArray(userInput)) {
+            const [title, desc, people] = userInput;
+            console.log(title, desc, people);
+            this.clearInputs();
+        }
     }
     configure() {
         this.element.addEventListener('submit', this.submitHandler);
