@@ -91,6 +91,16 @@ button:active {
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
   margin: 1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.projects li:hover {
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.46);
+}
+
+.projects li:active {
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.76);
 }
 
 .projects li h2 {
