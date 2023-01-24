@@ -135,19 +135,18 @@ function autobind(_, _2, descriptor) {
     };
     return adjDescriptor;
 }
-class ProjectInput {
+class ProjectInput extends Component {
     constructor() {
-        this.templateElement = document.getElementById('project-input');
-        this.hostElement = document.getElementById('app');
-        const importedNode = document.importNode(this.templateElement.content, true);
-        this.element = importedNode.firstElementChild;
-        this.element.id = 'user-input';
+        super('project-input', 'app', true, 'user-input');
         this.titleInputElement = this.element.querySelector('#title');
         this.descriptionInputElement = this.element.querySelector('#description');
         this.peopleInputElement = this.element.querySelector('#people');
         this.configure();
-        this.attach();
     }
+    configure() {
+        this.element.addEventListener('submit', this.submitHandler);
+    }
+    renderContent() { }
     gatherUserInput() {
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
@@ -189,12 +188,6 @@ class ProjectInput {
             projectState.addProject(title, desc, people);
             this.clearInputs();
         }
-    }
-    configure() {
-        this.element.addEventListener('submit', this.submitHandler);
-    }
-    attach() {
-        this.hostElement.insertAdjacentElement('afterbegin', this.element);
     }
 }
 __decorate([
