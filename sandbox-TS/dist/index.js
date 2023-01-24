@@ -45,6 +45,16 @@ class ProjectState extends State {
     addProject(title, description, numOfPeople) {
         const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active);
         this.projects.push(newProject);
+        this.updateListeners();
+    }
+    moveProject(prjId, newStatus) {
+        const targetProject = this.projects.find(prj => prj.id === prjId);
+        if (targetProject) {
+            targetProject.status = newStatus;
+            this.updateListeners();
+        }
+    }
+    updateListeners() {
         for (const listenerFn of this.listeners) {
             listenerFn(this.projects.slice());
         }
@@ -92,7 +102,8 @@ class ProjectItem extends Component {
         this.element.querySelector('p').textContent = this.project.description;
     }
     dragStartHandler(event) {
-        console.log('drag start', event);
+        event.dataTransfer.setData('text/plain', this.project.id);
+        event.dataTransfer.effectAllowed = 'move';
     }
     dragEndHandler(event) {
         console.log('drag end', event);
@@ -104,6 +115,24 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ProjectItem.prototype, "configure", null);
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ProjectItem.prototype, "renderContent", null);
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [DragEvent]),
+    __metadata("design:returntype", void 0)
+], ProjectItem.prototype, "dragStartHandler", null);
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [DragEvent]),
+    __metadata("design:returntype", void 0)
+], ProjectItem.prototype, "dragEndHandler", null);
 class ProjectList extends Component {
     constructor(type) {
         super('project-list', 'app', false, `${type}-projects`);
@@ -120,6 +149,9 @@ class ProjectList extends Component {
         }
     }
     configure() {
+        this.element.addEventListener('dragover', this.dragOverHandler);
+        this.element.addEventListener('dragleave', this.dragLeaveHandler);
+        this.element.addEventListener('drop', this.dropHandler);
         projectState.addListener((projects) => {
             const relevantProjects = projects.filter(prj => {
                 if (this.type === 'active') {
@@ -137,7 +169,44 @@ class ProjectList extends Component {
         this.element.querySelector('h2').textContent =
             this.type.toUpperCase() + ' PROJECTS';
     }
+    dragOverHandler(event) {
+        if (event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') {
+            event.preventDefault();
+            const listEl = this.element.querySelector('ul');
+            listEl.classList.add('droppable');
+            console.log(event);
+        }
+    }
+    dragLeaveHandler(event) {
+        const listEl = this.element.querySelector('ul');
+        listEl.classList.remove('droppable');
+        console.log(event);
+    }
+    dropHandler(event) {
+        const prjId = event.dataTransfer.getData('text/plain');
+        const newStatus = this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished;
+        projectState.moveProject(prjId, newStatus);
+        console.log(event);
+    }
 }
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [DragEvent]),
+    __metadata("design:returntype", void 0)
+], ProjectList.prototype, "dragOverHandler", null);
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [DragEvent]),
+    __metadata("design:returntype", void 0)
+], ProjectList.prototype, "dragLeaveHandler", null);
+__decorate([
+    autobind,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [DragEvent]),
+    __metadata("design:returntype", void 0)
+], ProjectList.prototype, "dropHandler", null);
 function validate(ValidatableInput) {
     let isValid = true;
     if (ValidatableInput.required) {
