@@ -12,12 +12,19 @@ class Project {
 	}
 }
 
-type Listener = (items: Project[]) => void;
+type Listener<T> = (items: T[]) => void;
+
+class State<T> {
+	protected listeners: Listener<T>[] = [];
+
+	addListener(listenerFn: Listener<T>) {
+		this.listeners.push(listenerFn);
+	}
+}
 
 // Project State Management class
 // singleton
-class ProjectState {
-	private listeners: Listener[] = [];
+class ProjectState extends State<Project> {
 
 	private projects: Project[] = [
 		// list of projects here
@@ -26,7 +33,7 @@ class ProjectState {
 	private static instance: ProjectState;
 
 	private constructor() {
-
+		super();
 	}
 
 	static getInstance() {
@@ -45,10 +52,6 @@ class ProjectState {
 		for (const listenerFn of this.listeners) {
 			listenerFn(this.projects.slice());
 		}
-	}
-
-	public addListener(listenerFn: Listener) {
-		this.listeners.push(listenerFn);
 	}
 }
 
