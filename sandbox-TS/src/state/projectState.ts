@@ -1,5 +1,5 @@
-import { Project } from '../interfaces/project.js';
-import { ProjectStatus } from '../interfaces/project.js';
+import { Project } from '../interfaces/project';
+import { ProjectStatus } from '../interfaces/project';
 
 type Listener<T> = (items: T[]) => void;
 
