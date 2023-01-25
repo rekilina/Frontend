@@ -1,3 +1,9 @@
+/// <reference path="../decorators/autobind.ts" />
+/// <reference path="./base-component.ts" />
+/// <reference path="../interfaces/DragDropInterfaces.ts" />
+/// <reference path="../interfaces/project.ts" />
+/// <reference path="../state/projectState.ts" />
+
 namespace DDInterfaces {
 	export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
 		implements Dragable {

@@ -1,3 +1,8 @@
+/// <reference path="../decorators/autobind.ts" />
+/// <reference path="./base-component.ts" />
+/// <reference path="../util/validation.ts" />
+/// <reference path="../state/projectState.ts" />
+
 namespace DDInterfaces {
 	export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
 		titleInputElement: HTMLInputElement;
