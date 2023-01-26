@@ -5,16 +5,23 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="./dist/bundle.js"></script>
+	<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2uOosm4FjD4KuT_KHpopKX568e5U9S1k"></script>
+	<script src="./dist/bundle.js" defer></script>
 	<link rel="stylesheet" href="./styles/styles.css">
 	<title>Document</title>
 </head>
 
 <body>
-	<div id="map"></div>
-	<form action="#">
+	<div id="map">
+		<p>Enter an address</p>
+	</div>
+	<form>
 		<input type="text" name="address" id="address">
+		<button type="submit">SEARCH PLACE</button>
 	</form>
+
+
+
 </body>
 
 </html>
