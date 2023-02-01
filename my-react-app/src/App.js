@@ -1,6 +1,6 @@
 
 import RenderExpense from './components/Expences/RenderExpense/RenderExpense';
-
+import NewExpense from './components/NewExpense/NewExpense';
 // const App = () => {}
 
 function App() {
@@ -25,12 +25,11 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
   return (
     <div>
-      <h2>Let's get started!</h2>
-
+      <NewExpense />
       <RenderExpense data={expenses} />
-
     </div>
   );
 }
