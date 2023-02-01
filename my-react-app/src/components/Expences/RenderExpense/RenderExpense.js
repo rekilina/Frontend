@@ -4,15 +4,19 @@ import Card from '../../Card/Card';
 
 
 function RenderExpense(props) {
-	return props.data.map(item => {
+	return <Card className='expenses'>
+		{
+			props.data.map(item => {
 
-		return <ExpenseItem
-			title={item.title}
-			amount={item.amount}
-			date={item.date}
-			key={Math.random()}
-		/>
-	})
+				return <ExpenseItem
+					title={item.title}
+					amount={item.amount}
+					date={item.date}
+					key={Math.random()}
+				/>
+			})
+		}
+	</Card>
 }
 
 
