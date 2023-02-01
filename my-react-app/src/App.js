@@ -1,5 +1,7 @@
-import ExpenseItem from './components/ExpenseItem/ExpenseItem';
-import RenderExpense from './components/RenderExpense/RenderExpense';
+
+import RenderExpense from './components/Expences/RenderExpense/RenderExpense';
+
+// const App = () => {}
 
 function App() {
   const expenses = [
