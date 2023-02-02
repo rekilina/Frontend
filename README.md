@@ -15,5 +15,4 @@ This program made in order to learn TypeScript and practice in OOP.
 ## Expenses Tracker
 React expense tracker app.
 Source code you can find [here](https://github.com/rekilina/Frontend/tree/main/my-react-app).<br>
-See how it works: [link](https://rekilina.github.io/Frontend/my-react-app/index.html).<br>
 This program made in order to learn React JS.
