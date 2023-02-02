@@ -3,7 +3,7 @@ import "./RenderExpense.css";
 import Card from '../../Card/Card';
 import ExpensesFilter from '../../ExpenseFilter/ExpenseFilter';
 import ExpensesList from '../ExpensesList/ExpensesList';
-
+import ExpenseChart from '../ExpensesChart/ExpensesChart';
 
 
 function RenderExpense(props) {
@@ -21,7 +21,9 @@ function RenderExpense(props) {
 
 
 	return <Card className='expenses'>
-		<ExpensesFilter selected={optionYear} onOptionChange={changeDisplayedYear} />
+		<ExpensesFilter selected={optionYear}
+			onOptionChange={changeDisplayedYear} />
+		<ExpenseChart expenses={filteredExpenses} />
 		<ExpensesList items={filteredExpenses} />
 	</Card>
 }
