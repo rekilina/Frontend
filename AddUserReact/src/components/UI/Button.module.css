@@ -1,0 +1,15 @@
+.adduser__form-button {
+	border-radius: 10px;
+	padding: 8px 15px;
+	border: none;
+	background-color: rgba(153,60,60,1);
+	font-size: 16px;
+	color: wheat;
+	cursor: pointer;
+	transition: 0.5s;
+	margin-top: 5px;
+	text-transform: uppercase;
+}
+.adduser__form-button:hover {
+	background-color: rgb(112, 44, 44);
+}
