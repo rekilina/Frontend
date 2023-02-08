@@ -9,13 +9,13 @@ function App() {
   const ctx = useContext(AuthContext);
 
   return (
-    <AuthContextProvider>
+    <>
       <MainHeader isAuthenticated={ctx.isLogged} />
       <main>
-        {!ctx.isLogged && <Login onLogin={ctx.loginHandler} />}
+        {!ctx.isLogged && <Login />}
         {ctx.isLogged && <Home />}
       </main>
-    </AuthContextProvider >
+    </ >
   );
 }
 
