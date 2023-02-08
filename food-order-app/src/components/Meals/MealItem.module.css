@@ -1,0 +1,39 @@
+.meal {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.meal__inner {
+  display: grid;
+  width: 70%;
+  grid-template-columns: 40% 40% 20%;
+}
+
+.meal h3 {
+  margin: 0;
+}
+
+.description {
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.price {
+  margin: 0;
+  font-weight: bold;
+  color: #ad5502;
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+@media(max-width: 800px) {
+  .meal__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
