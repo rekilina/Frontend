@@ -11,11 +11,27 @@ const defaultCartState = {
 // amount comes from the meal form
 
 // reducer function shouldn't be re-created every time the component changes
-const cardReducer = (state, action) => {
+const cartReducer = (state, action) => {
 	if (action.type === 'ADD') {
 		// generate and return a brand new state object
 		// that is why using concat
-		const updatedItems = state.items.concat(action.item);
+		const existingCartItemIndex = state.items.findIndex(
+			item => item.id === action.item.id
+		);
+		const existingCartItem = state.items[existingCartItemIndex];
+
+		let updatedItems;
+		if (existingCartItem) {
+			const updatedItem = {
+				...existingCartItem,
+				amount: existingCartItem.amount + action.item.amount
+			};
+			updatedItems = [...state.items];
+			updatedItems[existingCartItemIndex] = updatedItem;
+		} else {
+			updatedItems = state.items.concat(action.item);
+		}
+
 		const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
 		return {
 			items: updatedItems,
@@ -31,7 +47,7 @@ const CartProvider = (props) => {
 
 	// cartState is initialized with defaultCartState
 	// and ahs the same object structure
-	const [cartState, dispatchCartAction] = useReducer(cardReducer, defaultCartState);
+	const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
 	// we need to make sure that this function is being called
 	const addItemToCartHandler = (item) => {
