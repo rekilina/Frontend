@@ -13,11 +13,12 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        'https://react-http-6b4a6.firebaseio.com/tasks.json'
+        'https://react-http-tests-5c0a0-default-rtdb.firebaseio.com/tasks.json'
       );
 
       if (!response.ok) {
         throw new Error('Request failed!');
+        console.log(response.message);
       }
 
       const data = await response.json();
