@@ -1,46 +1,31 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const SimpleInput = (props) => {
-  const nameInputRef = useRef('');
-  const [enteredName, setEneteredName] = useState('');
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
+  const [enteredName, setEnteredName] = useState('');
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
+  const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
-  useEffect(() => {
-    console.log('name is valid');
-  }, [enteredNameIsValid]);
-
-  const nameInputChangeHandler = event => {
-    setEneteredName(event.target.value);
-
-    if (event.target.value.trim() !== '') {
-      setEnteredNameIsValid(true);
-      return;
-    }
-  }
 
   const formSubmissionHandler = event => {
     event.preventDefault();
     setEnteredNameTouched(true);
 
-    if (enteredName.trim() === '') {
-      setEnteredNameIsValid(false);
+    if (!enteredNameIsValid) {
       return;
     }
-    setEnteredNameIsValid(true);
+    // setEnteredNameIsValid(true);
     console.log(enteredName);
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue);
+    setEnteredName('');
+    setEnteredNameTouched(false);
   }
 
   const nameInputBlurHandler = event => {
     setEnteredNameTouched(true);
-    if (enteredName.trim() === '') {
-      setEnteredNameIsValid(false);
-      return;
-    }
+  }
+
+  const nameInputChangeHandler = event => {
+    setEnteredName(event.target.value);
   }
 
   const nameInputClasses = !nameInputIsInvalid
@@ -54,9 +39,9 @@ const SimpleInput = (props) => {
         <input
           type='text'
           id='name'
-          ref={nameInputRef}
           onChange={nameInputChangeHandler}
           onBlur={nameInputBlurHandler}
+          value={enteredName}
         />
         {(nameInputIsInvalid && <p>Name must not be empty</p>)}
       </div>
