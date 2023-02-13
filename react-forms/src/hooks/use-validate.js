@@ -16,12 +16,18 @@ const useValidate = (validateFn) => {
 		setEnteredValue(event.target.value);
 	}
 
+	const reset = () => {
+		setEnteredValue('');
+		setEnteredValueTouched(false);
+	}
+
 	return {
 		enteredValue,
 		valueInputIsInvalid,
 		InputBlurHandler,
 		InputChangeHandler,
-		enteredValueTouched
+		enteredValueTouched,
+		reset
 	};
 }
 
