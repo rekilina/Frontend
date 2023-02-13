@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-const useHTTP = (httpConfig, applyData) => {
+const useHTTP = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	const sendRequest = async (taskText) => {
+	const sendRequest = useCallback(async (httpConfig, applyData) => {
 		setIsLoading(true);
 		setError(null);
 		try {
@@ -19,7 +19,6 @@ const useHTTP = (httpConfig, applyData) => {
 
 			if (!response.ok) {
 				throw new Error('Request failed!');
-				console.log(response.message);
 			}
 
 			const data = await response.json();
@@ -30,7 +29,7 @@ const useHTTP = (httpConfig, applyData) => {
 			setError(err.message || 'Something went wrong!');
 		}
 		setIsLoading(false);
-	};
+	}, []);
 
 	return {
 		isLoading: isLoading,
