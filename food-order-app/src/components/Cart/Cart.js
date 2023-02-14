@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import CartItem from "./CartItem"
 import Checkout from './Checkout';
+import useHTTP from '../../hooks/use-HTTP'
 
 const Cart = props => {
 	const [isCheckout, setIsCheckout] = useState(false);
@@ -40,6 +41,25 @@ const Cart = props => {
 		setIsCheckout(true);
 	}
 
+	const { isLoading, error, sendRequest: sendUserData } = useHTTP();
+
+	const submitOrderHandler = async (userData) => {
+		const requestConfig = {
+			url: 'https://react-http-tests-5c0a0-default-rtdb.firebaseio.com/orders.json',
+			method: 'POST',
+			body: {
+				user: userData,
+				orderItems: ctxCart.items
+			},
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		const createOrder = (data) => { }
+		// we can use .bind(null, taskText) here
+		sendUserData(requestConfig, createOrder);
+	};
+
 	const modalActions = (
 		<div className={styles.actions}>
 			<button onClick={props.onClose} className={styles['button--alt']}>Close</button>
@@ -54,7 +74,7 @@ const Cart = props => {
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>
 			</div>
-			{isCheckout && <Checkout onCancel={props.onClose} />}
+			{isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
 			{!isCheckout && modalActions}
 		</Modal >
 	);
