@@ -8,6 +8,7 @@ import useHTTP from '../../hooks/use-HTTP'
 
 const Cart = props => {
 	const [isCheckout, setIsCheckout] = useState(false);
+	const [didSubmit, setDidSubmit] = useState(false);
 	const ctxCart = useContext(CartContext);
 
 	const totalAmount = `$${ctxCart.totalAmount.toFixed(2)}`;
@@ -44,8 +45,9 @@ const Cart = props => {
 	const { isLoading, error, sendRequest: sendUserData } = useHTTP();
 
 	const submitOrderHandler = async (userData) => {
+		// setIsSubmitting(true);
 		const requestConfig = {
-			url: 'https://react-http-tests-5c0a0-default-rtdb.firebaseio.com/orders.json',
+			url: 'https://eact-http-tests-5c0a0-default-rtdb.firebaseio.com/orders.json',
 			method: 'POST',
 			body: {
 				user: userData,
@@ -58,6 +60,11 @@ const Cart = props => {
 		const createOrder = (data) => { }
 		// we can use .bind(null, taskText) here
 		sendUserData(requestConfig, createOrder);
+		if (error == null) {
+			setDidSubmit(true);
+			ctxCart.clearCart();
+			console.log("here ", error);
+		}
 	};
 
 	const modalActions = (
@@ -67,8 +74,8 @@ const Cart = props => {
 		</div>
 	);
 
-	return (
-		<Modal onClose={props.onClose}>
+	const cartModalContent = (
+		<>
 			{cartItems}
 			<div className={styles.total}>
 				<span>Total Amount</span>
@@ -76,6 +83,25 @@ const Cart = props => {
 			</div>
 			{isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
 			{!isCheckout && modalActions}
+		</>
+	);
+
+	return (
+		<Modal onClose={props.onClose}>
+			{!isLoading && !error && !didSubmit && cartModalContent}
+			{isLoading && <p>Creating an order...</p>}
+			{error &&
+				<div className={styles.actions}>
+					<p>An Error occured while sending data.</p>
+					<button onClick={props.onClose} className={styles['button--alt']}>Close</button>
+				</div>
+			}
+			{(!error && !isLoading && didSubmit &&
+				<div className={styles.actions}>
+					<p>The order is placed.</p>
+					<button onClick={props.onClose} className={styles['button--alt']}>Close</button>
+				</div>
+			)}
 		</Modal >
 	);
 }

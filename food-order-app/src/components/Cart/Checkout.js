@@ -49,7 +49,7 @@ const Checkout = props => {
 			enteredCityIsValid;
 
 		if (!formIsValid) {
-
+			// return;
 		}
 		console.log('submit');
 		props.onConfirm({
