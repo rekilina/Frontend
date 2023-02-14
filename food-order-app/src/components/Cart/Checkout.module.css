@@ -1,7 +1,9 @@
 .form {
   margin: 1rem 0 0;
-  /* height: 19rem; */
+  max-height: 19rem;
   overflow: auto;
+  scrollbar-color: #ffe6dc #7a2706;
+  scrollbar-width: thin;
 }
 
 .control {
@@ -59,6 +61,7 @@
   background-color: #7a2706;
 }
 
+.invalid p,
 .invalid label {
   color: #ca3e51;
 }
