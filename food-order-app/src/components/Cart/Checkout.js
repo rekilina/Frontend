@@ -1,6 +1,7 @@
 import classes from "./Checkout.module.css"
 
-const confirmHandler = () => {
+const confirmHandler = (event) => {
+	event.preventDefault();
 	console.log('confirmHandler');
 }
 
