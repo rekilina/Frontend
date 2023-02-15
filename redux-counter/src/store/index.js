@@ -1,52 +1,8 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 // const redux = require('redux');
 
-const initialCounterState = {
-	counter: 0,
-	showCounter: true
-}
-
-// slice of our global state
-// createSlice function automatically creates unique action identifiers
-// for all our different reducers.
-const counterSlice = createSlice({
-	name: 'counter',  //every slice should have a name
-	initialState: initialCounterState,
-	reducers: { // all the reducers this slice needs
-		increment(state) {
-			// here we are allowed to mutate state!
-			// because redux aoutomatically create new state object
-			// event if we are mutating existing state
-			state.counter++;
-		},
-		decrement(state) {
-			state.counter--;
-		},
-		increase(state, action) {
-			state.counter = state.counter + action.payload;
-		},
-		toggle(state) {
-			state.showCounter = !state.showCounter;
-		}
-	}
-});
-
-const initialAuthState = {
-	isAuthenticated: false
-};
-
-const authSlice = createSlice({
-	name: 'auth',
-	initialState: initialAuthState,
-	reducers: {
-		login(state) {
-			state.isAuthenticated = true;
-		},
-		logout(state) {
-			state.isAuthenticated = false;
-		}
-	}
-});
+import counterReducer from './counter';
+import authReducer from './auth';
 
 // configureStore recieves configuration object
 // which has reducer property
@@ -57,8 +13,8 @@ const authSlice = createSlice({
 const store = configureStore({
 	//reducer: { counter: counterSlice.reducer } // map of reducers
 	reducer: {
-		counter: counterSlice.reducer,
-		auth: authSlice.reducer
+		counter: counterReducer,
+		auth: authReducer
 	}
 });
 
@@ -69,8 +25,5 @@ const store = configureStore({
 // counterSlice.actions.toggleCounter()
 // returns an action object of this type:
 // { type: 'some auto-generated unique identifier' }
-
-export const counterActions = counterSlice.actions;
-export const authActions = authSlice.actions;
 
 export default store;
