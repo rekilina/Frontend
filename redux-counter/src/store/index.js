@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 // const redux = require('redux');
 
 const initialState = {
@@ -6,34 +6,47 @@ const initialState = {
 	showCounter: true
 }
 
-const counterReducer = (state = initialState, action) => {
-	if (action.type === 'increment') {
-		return {
-			counter: state.counter + 1,
-			showCounter: true
+// slice of our global state
+// createSlice function automatically creates unique action identifiers
+// for all our different reducers.
+const counterSlice = createSlice({
+	name: 'counter',  //every slice should have a name
+	initialState: initialState,
+	reducers: { // all the reducers this slice needs
+		increment(state) {
+			// here we are allowed to mutate state!
+			// because redux aoutomatically create new state object
+			// event if we are mutating existing state
+			state.counter++;
+		},
+		decrement(state) {
+			state.counter--;
+		},
+		increase(state, action) {
+			state.counter = state.counter + action.payload;
+		},
+		toggle(state) {
+			state.showCounter = !state.showCounter;
 		}
 	}
-	if (action.type === 'decrement') {
-		return {
-			counter: state.counter - 1,
-			showCounter: true
-		}
-	}
-	if (action.type === 'increase') {
-		return {
-			counter: state.counter + action.amount,
-			showCounter: true
-		}
-	}
-	if (action.type === 'toggle') {
-		return {
-			counter: state.counter,
-			showCounter: !state.showCounter
-		}
-	}
-	return state;
-}
+});
 
-const store = createStore(counterReducer, initialState)
+// configureStore recieves configuration object
+// which has reducer property
+// the library will merge all our reducer in one big reducer
+const store = configureStore({
+	//reducer: { counter: counterSlice.reducer } // map of reducers
+	reducer: counterSlice.reducer
+});
+
+// as it was mentoined before,
+// createSlice automatically creates unique action identifiers
+// they are stored in counterSlice.actions
+// for example
+// counterSlice.actions.toggleCounter()
+// returns an action object of this type:
+// { type: 'some auto-generated unique identifier' }
+
+export const counterActions = counterSlice.actions;
 
 export default store;
