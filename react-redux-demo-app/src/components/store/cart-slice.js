@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { uiActions } from './ui-slice';
 
 const cartInitialState = {
 	items: [],
@@ -40,47 +39,13 @@ const cartSlice = createSlice({
 				existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
 			}
 			state.totalQuantity--;
+		},
+		replaceCart(state, action) {
+			state.totalQuantity = action.payload.totalQuantity;
+			state.items = action.payload.items;
 		}
 	}
 });
-
-export const sendCartData = (cart) => {
-	return async (dispatch) => {
-		dispatch(uiActions.showNotification({
-			status: 'pending',
-			title: 'Sending...',
-			message: 'Sending cart data!'
-		}));
-
-		const sendRequest = async () => {
-			const response = await fetch('https://react-http-tests-5c0a0-default-rtdb.firebaseio.com/cart.json',
-				{// override existing card with incoming data
-					method: 'PUT',
-					body: JSON.stringify(cart)
-				});
-
-			if (!response.ok) {
-				throw new Error('Sending cart data failed');
-			}
-		}
-		try {
-			await sendRequest();
-		} catch (error) {
-			dispatch(uiActions.showNotification({
-				status: 'error',
-				title: 'Error!',
-				message: `Sent cart data failed. ${error}`
-			}));
-		}
-
-
-		dispatch(uiActions.showNotification({
-			status: 'success',
-			title: 'Success...',
-			message: 'Sent cart data sucessfully.'
-		}));
-	}
-}
 
 export const cartActions = cartSlice.actions;
 
