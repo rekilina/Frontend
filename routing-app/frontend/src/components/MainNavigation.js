@@ -11,7 +11,7 @@ function MainNavigation() {
             <NavLink to="/" end className={({ isActive }) => isActive ? classes.active : ''}>Home</NavLink>
           </li>
           <li>
-            <NavLink to="events" end className={({ isActive }) => isActive ? classes.active : ''}>Events</NavLink>
+            <NavLink to="events" className={({ isActive }) => isActive ? classes.active : ''}>Events</NavLink>
           </li>
         </ul>
       </nav>
