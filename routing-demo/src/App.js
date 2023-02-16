@@ -6,6 +6,7 @@ import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import ProductsPage from './pages/Products';
 import RootLayout from './pages/Root';
+import ProductDetailPage from './pages/ProductDetail';
 
 // const routDefinitions = createRoutesFromElements(
 //   <Route>
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <ProductsPage />
+      },
+      {
+        path: '/products/:productId',
+        element: <ProductDetailPage />
       }
     ]
   }
