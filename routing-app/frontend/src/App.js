@@ -29,7 +29,7 @@ import EditEventPage from './pages/EditEventPage'
 import EventDetailPage from './pages/EventDetailPage'
 import NewEventPage from './pages/NewEventPage'
 import HomePage from './pages/HomePage'
-import EventsPage from './pages/EventsPage'
+import EventsPage, { eventsLoader } from './pages/EventsPage'
 import RootLayout from './pages/RootLayout';
 import EventsLayout from './pages/EventsLayout'
 
@@ -39,38 +39,15 @@ function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        {
-          index: true,
-          element: <HomePage />
-        },
+        { index: true, element: <HomePage /> },
         {
           path: 'events',
           element: <EventsLayout />,
           children: [
-            {
-              path: '',
-              element: <EventsPage />,
-              loader: async () => {
-                const response = await fetch('http://localhost:8080/events');
-                if (!response.ok) {
-                } else {
-                  const resData = await response.json();
-                  return resData.events;
-                }
-              }
-            },
-            {
-              path: ':eventId',
-              element: <EventDetailPage />
-            },
-            {
-              path: 'new',
-              element: <NewEventPage />
-            },
-            {
-              path: ':eventId/edit',
-              element: <EditEventPage />
-            }
+            { path: '', element: <EventsPage />, loader: eventsLoader },
+            { path: ':eventId', element: <EventDetailPage /> },
+            { path: 'new', element: <NewEventPage /> },
+            { path: ':eventId/edit', element: <EditEventPage /> }
           ]
         }
       ]
