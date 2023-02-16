@@ -5,6 +5,7 @@ const getPosition = (opts) => {
   const promise = new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       success => {
+        console.log('success')
         resolve(success);
       },
       error => {
@@ -18,7 +19,7 @@ const getPosition = (opts) => {
   return promise;
 }
 
-const setTimer = (duration, message) => {
+const setTimer = async (duration, message) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('Done!');
@@ -29,22 +30,23 @@ const setTimer = (duration, message) => {
   return promise;
 };
 
-function trackUserHandler() {
-  let positionData;
-  getPosition()
-    .then(posData => {
-      positionData = posData;
-      // here you can return any kind of data 
-      // and will be converted (wrapped) into a Promise
-      return setTimer(2000, 'first then');
-    })
-    .then(data => {
-      console.log(data, positionData);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  setTimer(1000, 'just timer').then(() => {
+async function trackUserHandler() {
+  const posData = await getPosition();
+  const timerData = await setTimer(2000, 'first then');
+  console.log(timerData, posData);
+  // .then(posData => {
+  //   positionData = posData;
+  //   // here you can return any kind of data 
+  //   // and will be converted (wrapped) into a Promise
+  //   return setTimer(2000, 'first then');
+  // })
+  // .then(data => {
+  //   console.log(data, positionData);
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // });
+  const anotherTimer = await setTimer(1000, 'just timer').then(() => {
     console.log('Timer done!');
   });
   console.log('Getting position...');
