@@ -32,12 +32,14 @@ import HomePage from './pages/HomePage'
 import EventsPage, { eventsLoader } from './pages/EventsPage'
 import RootLayout from './pages/RootLayout';
 import EventsLayout from './pages/EventsLayout'
+import ErrorPage from './pages/Error';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <RootLayout />,
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
         {
