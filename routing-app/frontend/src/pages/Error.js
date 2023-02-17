@@ -5,7 +5,8 @@ import PageContent from "./PageContent"
 
 function ErrorPage() {
 	const error = useRouteError();
-	const title = JSON.parse(error.data).message;
+	// const title = JSON.parse(error.data).message;
+	const title = error.data.message;
 
 	return <>
 		<MainNavigation />
