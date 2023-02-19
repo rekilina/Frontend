@@ -34,6 +34,7 @@ import RootLayout from './pages/RootLayout';
 import EventsLayout from './pages/EventsLayout'
 import ErrorPage from './pages/Error';
 import { action as newEventAction } from './pages/NewEventPage';
+import { action as deleteEventAction } from './pages/EventDetailPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -55,7 +56,8 @@ function App() {
               children: [
                 {
                   index: true,
-                  element: <EventDetailPage />
+                  element: <EventDetailPage />,
+                  action: deleteEventAction
                 },
                 {
                   path: 'edit',
@@ -63,7 +65,6 @@ function App() {
                 }
               ]
             },
-
             {
               path: 'new',
               element: <NewEventPage />,
