@@ -29,6 +29,13 @@ export async function action({ request, params }) {
 		}
 	}
 	);
+	if (response.status === 422) {
+		// we can use returned action data
+		// common for validation error responses
+		// use hook useActionData() to use this data 
+		// in the other component
+		return response;
+	}
 	console.log(response);
 	if (!response.ok) {
 		console.log('here');
