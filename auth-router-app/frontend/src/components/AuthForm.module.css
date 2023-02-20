@@ -23,7 +23,8 @@
   align-items: center;
 }
 
-.actions button {
+.actions button,
+.actions .button {
   font: inherit;
   cursor: pointer;
   padding: 0.5rem 1.5rem;
@@ -39,7 +40,8 @@
   color: var(--color-gray-300);
 }
 
-.actions button:hover {
+.actions button:hover,
+.actions .button:hover {
   background-color: var(--color-primary-300);
 }
 
