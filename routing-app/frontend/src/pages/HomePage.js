@@ -1,9 +1,10 @@
+import PageContent from './PageContent';
+
 function HomePage() {
 	return (
-		<>
-			<h1>HomePage</h1>
-			<h2>Just dummy page</h2>
-		</>
+		<PageContent title="Welcome!">
+			<h2>Browse all our amazing events!</h2>
+		</PageContent>
 	);
 }
 
