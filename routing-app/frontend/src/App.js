@@ -33,7 +33,7 @@ import EventsPage, { eventsLoader } from './pages/EventsPage'
 import RootLayout from './pages/RootLayout';
 import EventsLayout from './pages/EventsLayout'
 import ErrorPage from './pages/Error';
-import { action as newEventAction } from './pages/NewEventPage';
+import { action as manipulateEventAction } from './components/EventForm';
 import { action as deleteEventAction } from './pages/EventDetailPage';
 
 function App() {
@@ -61,14 +61,15 @@ function App() {
                 },
                 {
                   path: 'edit',
-                  element: <EditEventPage />
+                  element: <EditEventPage />,
+                  action: manipulateEventAction
                 }
               ]
             },
             {
               path: 'new',
               element: <NewEventPage />,
-              action: newEventAction
+              action: manipulateEventAction
             }
 
           ]
