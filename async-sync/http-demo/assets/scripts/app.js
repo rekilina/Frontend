@@ -21,7 +21,16 @@ function sendHttpRequest(method, url, data) {
 
 		// This will be called after the response is received
 		xhr.onload = function () {
-			resolve(xhr.response);
+			if (xhr.status >= 200 && xhr.status < 300) {
+
+				resolve(xhr.response);
+			} else {
+				reject(new Error('Smth went wrong!'));
+			}
+		}
+
+		xhr.onerror = function () {
+			reject(new Error('Smth went wrong!'));
 		}
 	});
 	return promise;
@@ -45,15 +54,19 @@ function sendHttpRequest(method, url, data) {
 // }
 
 async function fetchPosts() {
-	const responseData = await sendHttpRequest('GET', 'https://jsonplaceholder.typicode.com/posts');
-	const listOfPosts = JSON.parse(responseData);
+	try {
+		const responseData = await sendHttpRequest('GET', 'https://jsonplaceholder.typicode.com/posts');
+		const listOfPosts = JSON.parse(responseData);
 
-	for (const post of listOfPosts) {
-		const postEl = document.importNode(postTemplate.content, true);
-		postEl.querySelector('h2').textContent = post.title.toUpperCase();
-		postEl.querySelector('p').textContent = post.body;
-		postEl.querySelector('li').id = post.id;
-		listElement.append(postEl);
+		for (const post of listOfPosts) {
+			const postEl = document.importNode(postTemplate.content, true);
+			postEl.querySelector('h2').textContent = post.title.toUpperCase();
+			postEl.querySelector('p').textContent = post.body;
+			postEl.querySelector('li').id = post.id;
+			listElement.append(postEl);
+		}
+	} catch (err) {
+		alert(err);
 	}
 }
 
