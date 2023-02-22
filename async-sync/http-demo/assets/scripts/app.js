@@ -22,7 +22,10 @@ function sendHttpRequest(method, url, data) {
 		if (response.status >= 200 && response.status < 300) {
 			return response.json()
 		} else {
-			throw new Error('Smth went wrong on the server-side');
+			return response.json().then(errData => {
+				console.log(errData);
+				throw new Error('Smth went wrong on the server-side');
+			});
 		}
 	}).catch(err => {
 		console.log(err);
