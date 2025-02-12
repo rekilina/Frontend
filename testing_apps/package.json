@@ -1,0 +1,22 @@
+{
+  "name": "testing_apps",
+  "version": "1.0.0",
+  "description": "## calendar The program generates a calendar for the entered year.<br> Source code you can find [here](https://github.com/rekilina/Frontend/tree/main/sandbox-JS/calendar).<br> See how it works: [link](https://rekilina.github.io/Frontend/sandbox-JS/calendar/index.html).<br> This program made in order to understand how the `EventListener` works and how can I manipulate elements in the `DOM`.<br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rekilina/Frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rekilina/Frontend/issues"
+  },
+  "homepage": "https://github.com/rekilina/Frontend#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

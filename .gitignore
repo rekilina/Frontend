@@ -4,3 +4,4 @@ gulp-start/node_modules/**
 sandbox-JS/DOM/examples_dom/**
 sandbox-JS/tests.html
 sandbox-TS/node*
+**/node_modules/**
