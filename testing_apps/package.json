@@ -18,5 +18,8 @@
   "homepage": "https://github.com/rekilina/Frontend#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
   }
 }
