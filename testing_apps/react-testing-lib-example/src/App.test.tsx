@@ -1,11 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import App from './App';
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 
 describe('Test app with React Router', () => {
 	test('Router test', () => {
-		render(<App />);
+		render(
+			<MemoryRouter>
+				<App />
+			</MemoryRouter>
+		);
 		const homePageLink = screen.getByTestId('home-page-link');
 		const usersPageLink = screen.getByTestId('users-page-link');
 		// click on these links
