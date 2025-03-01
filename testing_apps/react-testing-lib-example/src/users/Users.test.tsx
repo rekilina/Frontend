@@ -93,6 +93,6 @@ describe('USERS TEST', () => {
 		screen.debug();
 		expect(users).toHaveLength(3);
 		expect(axios.get).toHaveBeenCalledTimes(1);
-		screen.debug();
+		// screen.debug();
 	});
 });

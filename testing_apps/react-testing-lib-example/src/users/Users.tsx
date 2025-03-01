@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
+import './Users.css'
 
 type User = {
 	id: number;
@@ -19,14 +20,19 @@ const Users = () => {
 	}, []);
 
 	return (
-		<div>{
-			users.map(user => (
-				<div
-					key={user.id}
-					data-testid="user-item">
-					{user.name}
-				</div>))
-		}</div>
+		<ul
+			className='user-ul'
+			data-testid="user-list">
+			{
+				users.map(user => (
+					<li
+						key={user.id}
+						data-testid="user-item"
+						className='user-li'>
+						{user.name}
+					</li>))
+			}
+		</ul>
 	)
 }
 

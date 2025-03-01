@@ -1,0 +1,15 @@
+.user-ul {
+	text-align: left;
+	font-size: 20px;
+}
+
+.user-li {
+	margin-bottom: 10px;
+}
+
+
+.user-li::before {
+	content: '';
+	width: 5px;
+	display: inline-block;
+}
