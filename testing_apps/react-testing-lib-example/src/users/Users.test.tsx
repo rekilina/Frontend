@@ -5,6 +5,7 @@ import axios from 'axios';
 import { vi, Mock } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import User from './User';
+import AppRouter from '../AppRouter';
 
 
 // jest.mock('axios');
@@ -111,11 +112,9 @@ describe('USERS TEST', () => {
 		// Не можем просто рендерить Users, так как в нем не указаны другие рауты,
 		// Они указаны в App. Так что придется указать их явно
 		render(
-			<MemoryRouter initialEntries={["/users"]}>
-				<Routes>
-					<Route path="/users" element={<Users />} />
-					<Route path={`/users/:id`} element={<User />} />
-				</Routes>
+			<MemoryRouter>
+				<AppRouter />
+				<Users />
 			</MemoryRouter>
 		);
 		const users = await screen.findAllByTestId('user-item');
