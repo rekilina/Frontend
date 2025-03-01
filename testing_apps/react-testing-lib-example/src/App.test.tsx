@@ -21,4 +21,13 @@ describe('Test app with React Router', () => {
 		screen.debug();
 		expect(screen.getByTestId('user-list')).toBeInTheDocument();
 	})
+
+	test('Reder error page', () => {
+		render(
+			<MemoryRouter initialEntries={["/asdasd"]}>
+				<App />
+			</MemoryRouter>
+		);
+		expect(screen.getByTestId('error-page')).toBeInTheDocument();
+	})
 })

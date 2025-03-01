@@ -2,6 +2,7 @@ import './App.css'
 import Users from './users/Users';
 import { Link, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/users" element={<Users/>} />
+        <Route path="/*" element={<ErrorPage/>} />
       </Routes>
     </>
   )
