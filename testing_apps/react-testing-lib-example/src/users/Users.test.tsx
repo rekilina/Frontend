@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Users from './Users';
 import axios from 'axios';
 import { vi, Mock } from 'vitest';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import User from './User';
 
 
 // jest.mock('axios');
@@ -82,11 +84,20 @@ describe('USERS TEST', () => {
 			}
 		]
 	}
+
+	afterEach(() => {
+		vi.clearAllMocks();
+	});
+
 	test('Renders users', async () => {
 		// Properly mock axios.get with mockResolvedValue
 		// (axios.get as jest.Mock) if you use jest
 		(axios.get as Mock).mockReturnValue(response);
-		render(<Users />);
+		render(
+			<MemoryRouter>
+				<Users />
+			</MemoryRouter>
+		);
 		// Don't forget to import screen, otherwise
 		// you might face ts error about findAllByTestId method
 		const users = await screen.findAllByTestId('user-item');
@@ -95,4 +106,23 @@ describe('USERS TEST', () => {
 		expect(axios.get).toHaveBeenCalledTimes(1);
 		// screen.debug();
 	});
+
+	test('Go to user details', async() => {
+		// Не можем просто рендерить Users, так как в нем не указаны другие рауты,
+		// Они указаны в App. Так что придется указать их явно
+		render(
+			<MemoryRouter initialEntries={["/users"]}>
+				<Routes>
+					<Route path="/users" element={<Users />} />
+					<Route path={`/users/:id`} element={<User />} />
+				</Routes>
+			</MemoryRouter>
+		);
+		const users = await screen.findAllByTestId('user-item');
+		expect(users).toHaveLength(3);
+		const firstUser = users[0].querySelector('a')!;
+		fireEvent.click(firstUser);
+		const userDetail = screen.getByTestId('user-detail-page')
+		expect(userDetail).toBeInTheDocument();
+	})
 });

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import './Users.css'
+import { Link } from 'react-router-dom';
 
 type User = {
 	id: number;
@@ -20,7 +21,7 @@ const Users = () => {
 	}, []);
 
 	return (
-		<ul
+		<div
 			className='user-ul'
 			data-testid="user-list">
 			{
@@ -29,10 +30,13 @@ const Users = () => {
 						key={user.id}
 						data-testid="user-item"
 						className='user-li'>
-						{user.name}
+						<Link
+							to={`/users/${user.id}`}>
+							{user.name}
+						</Link>
 					</li>))
 			}
-		</ul>
+		</div>
 	)
 }
 

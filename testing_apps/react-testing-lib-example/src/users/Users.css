@@ -1,6 +1,8 @@
 .user-ul {
 	text-align: left;
 	font-size: 20px;
+	display: flex;
+	flex-direction: column;
 }
 
 .user-li {
