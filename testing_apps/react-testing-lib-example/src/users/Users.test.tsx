@@ -3,10 +3,8 @@ import '@testing-library/jest-dom';
 import Users from './Users';
 import axios from 'axios';
 import { vi, Mock } from 'vitest';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import User from './User';
-import AppRouter from '../AppRouter';
-
+import { MemoryRouter } from 'react-router-dom';
+import { RenderWithRouter } from '../tests/helpers/RenderWithRouter';
 
 // jest.mock('axios');
 vi.mock('axios');
@@ -112,10 +110,10 @@ describe('USERS TEST', () => {
 		// Не можем просто рендерить Users, так как в нем не указаны другие рауты,
 		// Они указаны в App. Так что придется указать их явно
 		render(
-			<MemoryRouter>
-				<AppRouter />
-				<Users />
-			</MemoryRouter>
+			<RenderWithRouter >
+				{/* or pass initialRoute="/users" */}
+				<Users /> 
+			</RenderWithRouter>
 		);
 		const users = await screen.findAllByTestId('user-item');
 		expect(users).toHaveLength(3);
